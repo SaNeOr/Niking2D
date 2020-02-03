@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{EFC6888B-99BF-4F45-A4BF-FCD15C5D9345}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Niking2D", "Niking2D\Niking2D.vcxproj", "{893CDFA6-D9EE-47FC-BAE4-171A7FD29874}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{893CDFA6-D9EE-47FC-BAE4-171A7FD29874}.Debug|x64.ActiveCfg = Debug|x64
+		{893CDFA6-D9EE-47FC-BAE4-171A7FD29874}.Debug|x64.Build.0 = Debug|x64
+		{893CDFA6-D9EE-47FC-BAE4-171A7FD29874}.Release|x64.ActiveCfg = Release|x64
+		{893CDFA6-D9EE-47FC-BAE4-171A7FD29874}.Release|x64.Build.0 = Release|x64
+		{EFC6888B-99BF-4F45-A4BF-FCD15C5D9345}.Debug|x64.ActiveCfg = Debug|x64
+		{EFC6888B-99BF-4F45-A4BF-FCD15C5D9345}.Debug|x64.Build.0 = Debug|x64
+		{EFC6888B-99BF-4F45-A4BF-FCD15C5D9345}.Release|x64.ActiveCfg = Release|x64
+		{EFC6888B-99BF-4F45-A4BF-FCD15C5D9345}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {09CCE8EB-C5AB-4ADE-B246-1843CDA87569}
+	EndGlobalSection
+EndGlobal
