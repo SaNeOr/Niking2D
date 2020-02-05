@@ -1,0 +1,3 @@
+[submodule "niking2d/vendor/spdlog"]
+	path = niking2d/vendor/spdlog
+	url = https://github.com/gabime/spdlog
