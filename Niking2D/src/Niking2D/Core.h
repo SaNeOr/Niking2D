@@ -11,3 +11,5 @@
 #else
 	#error Niking2D only supports Windows!
 #endif // N2_PLATFORM_WINDOWS
+
+#define BIT(x) (1<<x)

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core.h"
+#include "Events/Event.h"
 
 namespace Niking2D {
 	class N2_API Application
@@ -12,6 +13,7 @@ namespace Niking2D {
 
 		virtual void Run();
 	};
+
 
 
 	//	To be defined in CLIENT
