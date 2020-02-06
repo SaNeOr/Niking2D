@@ -19,6 +19,10 @@ workspace "Niking2D"
 		targetdir("bin/" .. outputdir .. "/%{prj.name}")
 		objdir("bin-int/" .. outputdir .. "/%{prj.name}")
 	
+		pchheader "n2pch.h"
+		pchsource "%{prj.name}/src/n2pch.cpp"
+
+
 		files{
 			"%{prj.name}/src/**.h",
 			"%{prj.name}/src/**.cpp"

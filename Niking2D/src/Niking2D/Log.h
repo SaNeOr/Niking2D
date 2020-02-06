@@ -5,7 +5,6 @@
 #include <spdlog/fmt/ostr.h>
 
 #include "Core.h"
-#include <memory>
 
 namespace Niking2D {
 

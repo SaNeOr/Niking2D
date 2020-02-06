@@ -1,7 +1,7 @@
 #pragma once
+#include "n2pch.h"
 
 #include "Event.h"
-#include <sstream>
 
 namespace Niking2D {
 	class N2_API WindowResizeEvent :public Event {

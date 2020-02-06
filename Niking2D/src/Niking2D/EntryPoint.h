@@ -1,6 +1,4 @@
 #pragma once
-#include <sstream>
-
 
 #ifdef N2_PLATFORM_WINDOWS
 extern Niking2D::Application * Niking2D::CreateApplication();

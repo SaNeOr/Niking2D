@@ -1,8 +1,7 @@
 #pragma once
+#include "n2pch.h"
 
 #include "Niking2D/Core.h"
-#include <string>
-#include <functional>
 
 
 namespace Niking2D {
