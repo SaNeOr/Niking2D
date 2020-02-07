@@ -22,4 +22,17 @@ namespace Niking2D {
 	private:
 		unsigned int m_Width, m_Height;
 	};
+
+	class N2_API WindowCloseEvent : public Event {
+	public:
+
+		EVENT_CLASS_TYPE(WindowClose)
+		EVENT_CLASS_CATEGORY(EventCategoryApplication)
+
+		std::string ToString() const override {
+			std::stringstream ss;
+			ss << "WindowCloseEvent";
+			return ss.str();
+		}
+	};
 }

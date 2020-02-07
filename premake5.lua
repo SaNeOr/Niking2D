@@ -11,6 +11,12 @@ workspace "Niking2D"
 
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
+	IncludeDir ={}
+	IncludeDir["GLFW"] = "Niking2D/vendor/GLFW"
+
+	-- runs "%{prj.name}/vendor/GLFW/premake5.lua"
+	include "Niking2D/vendor/GLFW"
+
 	project "Niking2D"
 		location "Niking2D"
 		kind "SharedLib"
@@ -28,9 +34,15 @@ workspace "Niking2D"
 			"%{prj.name}/src/**.cpp"
 		}
 
+		links{
+			"GLFW",
+			"opengl32.lib"
+		}
+
 		includedirs{
 			"%{prj.name}/src",
-			"%{prj.name}/vendor/spdlog/include"
+			"%{prj.name}/vendor/spdlog/include",
+			"%{IncludeDir.GLFW}/include"
 		}
 
 		filter "system:windows"

@@ -1,15 +1,20 @@
 #include "n2pch.h"
 #include "Application.h"
 
-#include "Events/ApplicationEvent.h"
 #include "Events/KeyEvent.h"
 #include "Log.h"
+
+
+#define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 namespace Niking2D {
 
 	Application::Application()
 	{
+		m_Window = (std::unique_ptr<Window>) Window::Create();
+		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
+		
 	}
 	Application::~Application()
 	{
@@ -18,22 +23,23 @@ namespace Niking2D {
 	void Application::Run()
 	{
 
-		WindowResizeEvent e(120, 720);
-		if (e.IsInCategory(EventCategoryApplication)) {
-			N2_CLIENT_TRACE(e);
-		}
-		if (e.IsInCategory(EventCategoryInput)) {
-			N2_CLIENT_TRACE(e);
+		while (m_Running) {
+			m_Window->OnUpdate();
 		}
 
-		KeyPressedEvent k(2,2);
-		if (k.IsInCategory(EventCategoryInput)) {
-			N2_CLIENT_TRACE(k);
-		}
+	}
+	void Application::OnEvent(Event & e)
+	{
 
-
+		EventDispatcher dispatcher(e);
 		
-		while (true);
+		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
+		N2_CORE_TRACE("{0}", e);
+	}
 
+	bool Application::OnWindowClose(WindowCloseEvent & e)
+	{
+		m_Running = false;
+		return true;
 	}
 }
