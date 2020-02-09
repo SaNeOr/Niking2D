@@ -63,14 +63,17 @@ workspace "Niking2D"
 		
 		filter "configurations:Debug"
 			defines "N2_DEBUG"
+			buildoptions "/MDd"
 			symbols "on"
 
 		filter "configurations:Release"
 			defines "N2_RELEASE"
+			buildoptions "/MD"
 			optimize "on"
 
 		filter "configurations:Dist"
 			defines "N2_DIST"
+			buildoptions "/MD"
 			symbols "on"
 
 
@@ -108,12 +111,15 @@ workspace "Niking2D"
 
 		filter "configurations:Debug"
 			defines "N2_DEBUG"
+			buildoptions "/MDd"
 			symbols "on"
 
 		filter "configurations:Release"
 			defines "N2_RELEASE"
+			buildoptions "/MD"
 			optimize "on"
 
 		filter "configurations:Dist"
 			defines "N2_DIST"
+			buildoptions "/MD"
 			symbols "on"

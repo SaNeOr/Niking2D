@@ -75,7 +75,7 @@ namespace Niking2D {
 		glfwSetWindowUserPointer(m_Window, &m_Data);
 		SetVSync(true);
 
-		//	Set GLFW callbacks'
+		//	Set GLFW callbacks
 		glfwSetWindowSizeCallback(m_Window, [](GLFWwindow* window, int width, int height) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 			data.Width = width;
@@ -90,7 +90,6 @@ namespace Niking2D {
 			data.EventCallback(event);
 		});
 		
-
 		glfwSetKeyCallback(m_Window, [](GLFWwindow* window, int key, int scancode, int action, int mods) {
 			WindowData& data = *(WindowData*)glfwGetWindowUserPointer(window);
 
@@ -152,6 +151,8 @@ namespace Niking2D {
 			MouseMoveEvent event((float)xPos, (float)yPos);
 			data.EventCallback(event);
 		});
+
+		
 	}
 
 	void WindowsWindow::ShutDown()

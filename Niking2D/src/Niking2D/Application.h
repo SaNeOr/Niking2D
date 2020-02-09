@@ -3,6 +3,7 @@
 #include "Core.h"
 #include "Events/Event.h"
 #include "Niking2D/Window.h"
+#include "Niking2D/LayerStack.h"
 
 #include "Events/ApplicationEvent.h"
 
@@ -20,9 +21,13 @@ namespace Niking2D {
 
 		bool OnWindowClose(WindowCloseEvent& e);
 
+		void PushLayer(Layer* layer);
+		void PushOverLayer(Layer* layer);
+
 	private:
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
+		LayerStack m_LayerStack;
 	};
 
 
