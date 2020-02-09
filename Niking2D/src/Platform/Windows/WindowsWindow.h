@@ -1,7 +1,9 @@
 #pragma once
 
 #include "Niking2D/Window.h"
+
 #include <GLFW/glfw3.h>
+
 
 namespace Niking2D {
 	class WindowsWindow : public Window {

@@ -12,10 +12,12 @@ workspace "Niking2D"
 	outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 	IncludeDir ={}
-	IncludeDir["GLFW"] = "Niking2D/vendor/GLFW"
+	IncludeDir["GLFW"] = "Niking2D/vendor/GLFW/include"
+	IncludeDir["Glad"] = "Niking2D/vendor/Glad/include"
 
 	-- runs "%{prj.name}/vendor/GLFW/premake5.lua"
 	include "Niking2D/vendor/GLFW"
+	include "Niking2D/vendor/Glad"
 
 	project "Niking2D"
 		location "Niking2D"
@@ -36,13 +38,15 @@ workspace "Niking2D"
 
 		links{
 			"GLFW",
+			"Glad",
 			"opengl32.lib"
 		}
 
 		includedirs{
 			"%{prj.name}/src",
 			"%{prj.name}/vendor/spdlog/include",
-			"%{IncludeDir.GLFW}/include"
+			"%{IncludeDir.GLFW}",
+			"%{IncludeDir.Glad}"
 		}
 
 		filter "system:windows"
@@ -54,7 +58,7 @@ workspace "Niking2D"
 	
 			"N2_PLATFORM_WINDOWS",
 			"N2_BUILD_DLL",
-
+			"GLFW_INCLUDE_NONE"
 		}
 
 		postbuildcommands{
