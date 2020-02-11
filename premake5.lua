@@ -14,10 +14,12 @@ workspace "Niking2D"
 	IncludeDir ={}
 	IncludeDir["GLFW"] = "Niking2D/vendor/GLFW/include"
 	IncludeDir["Glad"] = "Niking2D/vendor/Glad/include"
+	IncludeDir["ImGui"]= "Niking2D/vendor/imgui"
 
 	-- runs "%{prj.name}/vendor/GLFW/premake5.lua"
 	include "Niking2D/vendor/GLFW"
 	include "Niking2D/vendor/Glad"
+	include "Niking2D/vendor/imgui"
 
 	project "Niking2D"
 		location "Niking2D"
@@ -39,6 +41,7 @@ workspace "Niking2D"
 		links{
 			"GLFW",
 			"Glad",
+			"ImGui",
 			"opengl32.lib"
 		}
 
@@ -46,7 +49,8 @@ workspace "Niking2D"
 			"%{prj.name}/src",
 			"%{prj.name}/vendor/spdlog/include",
 			"%{IncludeDir.GLFW}",
-			"%{IncludeDir.Glad}"
+			"%{IncludeDir.Glad}",
+			"%{IncludeDir.ImGui}"
 		}
 
 		filter "system:windows"

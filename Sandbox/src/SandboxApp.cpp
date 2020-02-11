@@ -1,4 +1,4 @@
- #include <Niking2D.h>
+#include <Niking2D.h>
 
 
 
@@ -27,6 +27,8 @@ class Sandbox : public Niking2D::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
+		PushOverLayer(new Niking2D::ImGuiLayer());
+		
 	}
 	
 	~Sandbox() {

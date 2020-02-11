@@ -12,6 +12,15 @@ namespace Niking2D {
 	{
 	public:
 
+	/*	static Application& Get() {
+			static Application instance;
+			return instance;
+		}*/
+
+		inline static Application& Get() {
+			return *s_Instance;
+		}
+
 		Application();
 		~Application();
 
@@ -24,7 +33,12 @@ namespace Niking2D {
 		void PushLayer(Layer* layer);
 		void PushOverLayer(Layer* layer);
 
+		inline Window& GetWindow() {
+			return *m_Window;
+		}
+
 	private:
+		static Application* s_Instance;
 		std::unique_ptr<Window> m_Window;
 		bool m_Running = true;
 		LayerStack m_LayerStack;

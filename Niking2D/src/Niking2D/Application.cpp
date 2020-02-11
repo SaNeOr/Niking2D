@@ -10,12 +10,18 @@
 
 namespace Niking2D {
 
+	//static Application* Application::s_in
+	Application* Application::s_Instance = nullptr;
+
 	Application::Application()
 	{
+		N2_CORE_ASSERT(!s_Instance, "Application already exists!");
+		s_Instance = this;
+
 		m_Window = (std::unique_ptr<Window>) Window::Create();
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
-	}
+ 	}
 
 	Application::~Application()
 	{
@@ -51,17 +57,21 @@ namespace Niking2D {
 		}
 	}
 
-	bool Application::OnWindowClose(WindowCloseEvent & e)
+	bool Application::OnWindowClose(WindowCloseEvent& e)
 	{
 		m_Running = false;
 		return true;
 	}
-	void Application::PushLayer(Layer * layer)
+
+	void Application::PushLayer(Layer* layer)
 	{
 		m_LayerStack.PushLayer(layer);
+		layer->OnAttach();
 	}
-	void Application::PushOverLayer(Layer * layer)
+
+	void Application::PushOverLayer(Layer* layer)
 	{
 		m_LayerStack.PushOverLayer(layer);
+		layer->OnAttach();
 	}
 }
