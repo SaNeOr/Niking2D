@@ -18,6 +18,9 @@ namespace Niking2D {
 			ss << "WindowResieEvent: (" << m_Width << ", " << m_Height << ")";
 			return ss.str();
 		}
+
+		inline int GetWidth() const { return m_Width; }
+		inline int GetHeight() const { return m_Height; }
 		
 	private:
 		unsigned int m_Width, m_Height;
