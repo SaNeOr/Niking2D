@@ -38,6 +38,9 @@ namespace Niking2D {
 				layer->OnUpdate();
 			}
 
+			auto[x, y] = Input::GetMousePosition();
+			N2_CORE_TRACE("{0}, {1}", x, y);
+
 			m_Window->OnUpdate();
 		}
 

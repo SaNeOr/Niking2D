@@ -6,6 +6,7 @@
 #include "Niking2D/LayerStack.h"
 
 #include "Events/ApplicationEvent.h"
+#include "Niking2D/Input.h"
 
 namespace Niking2D {
 	class N2_API Application
@@ -17,9 +18,6 @@ namespace Niking2D {
 			return instance;
 		}*/
 
-		inline static Application& Get() {
-			return *s_Instance;
-		}
 
 		Application();
 		~Application();
@@ -33,6 +31,12 @@ namespace Niking2D {
 		void PushLayer(Layer* layer);
 		void PushOverLayer(Layer* layer);
 
+
+
+
+		inline static Application& Get() {
+			return *s_Instance;
+		}
 		inline Window& GetWindow() {
 			return *m_Window;
 		}
