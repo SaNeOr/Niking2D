@@ -4,3 +4,6 @@
 [submodule "Niking2D/vendor/GLFW"]
 	path = Niking2D/vendor/GLFW
 	url = https://github.com/TheCherno/GLFW
+[submodule "Niking2d/vendor/glm"]
+	path = Niking2d/vendor/glm
+	url = https://github.com/g-truc/glm

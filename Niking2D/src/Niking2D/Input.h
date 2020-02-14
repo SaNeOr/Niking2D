@@ -1,10 +1,11 @@
 #pragma once
+#include "Niking2D/Core.h"
 
 namespace Niking2D {
-	class Input{
+	class  N2_API Input{
 
 	public:
-		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressed(keycode); }
+		inline static bool IsKeyPressed(int keycode) { return s_Instance->IsKeyPressedImpl(keycode); }
 
 		inline static bool IsMouseButtonPressed(int button) {return s_Instance->IsMouseButtonPressedImpl(button); }
 
