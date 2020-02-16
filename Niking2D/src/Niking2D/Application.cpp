@@ -40,6 +40,8 @@ namespace Niking2D {
 			//auto[x, y] = Input::GetMousePosition();
 			//N2_CORE_TRACE("{0}, {1}", x, y);
 			
+			//docking
+
 			m_Window->OnUpdate();
 		}
 
