@@ -21,6 +21,10 @@ namespace Niking2D {
 		m_Window = (std::unique_ptr<Window>) Window::Create();
 		m_Window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 
+		m_ImGuiLayer = new ImGuiLayer();
+
+		PushOverLayer(m_ImGuiLayer);
+
  	}
 
 	Application::~Application()
@@ -33,13 +37,27 @@ namespace Niking2D {
 		while (m_Running) {
 
 			glClear(GL_COLOR_BUFFER_BIT);
-			for (Layer* layer : m_LayerStack) {
-				layer->OnUpdate();
-			}
 
+			//for (Layer* layer : m_LayerStack) {
+			//	layer->OnUpdate();
+			//}
+
+			m_ImGuiLayer->Begin();
+
+			for (Layer* layer : m_LayerStack) {
+				layer->OnImGuiRender();
+			}
+			m_ImGuiLayer->End();
+			
 			//auto[x, y] = Input::GetMousePosition();
 			//N2_CORE_TRACE("{0}, {1}", x, y);
-			
+			//m_ImGuiLayer->Begin();
+			//	for (Layer* layer : m_LayerStack) {
+			//		layer->OnUpdate();
+			//	}
+			//m_ImGuiLayer->End();
+				
+
 			m_Window->OnUpdate();
 		}
 
