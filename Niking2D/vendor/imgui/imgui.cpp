@@ -1,4 +1,3 @@
-
 // dear imgui, v1.73 WIP
 // (main code and documentation)
 
@@ -1007,8 +1006,6 @@ CODE
 #else
 #include <stdint.h>     // intptr_t
 #endif
-
-
 
 // Debug options
 #define IMGUI_DEBUG_NAV_SCORING     0   // Display navigation scoring preview when hovering items. Display last moving direction matches when holding CTRL

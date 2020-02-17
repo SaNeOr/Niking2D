@@ -3997,8 +3997,6 @@ struct ExampleAppLog
     }
 };
 
-
-
 // Demonstrate creating a simple log window with basic filtering.
 static void ShowExampleAppLog(bool* p_open)
 {
@@ -4016,10 +4014,8 @@ static void ShowExampleAppLog(bool* p_open)
         {
             const char* categories[3] = { "info", "warn", "error" };
             const char* words[] = { "Bumfuzzled", "Cattywampus", "Snickersnee", "Abibliophobia", "Absquatulate", "Nincompoop", "Pauciloquent" };
-
             log.AddLog("[%05d] [%s] Hello, current time is %.1f, here's a word: '%s'\n",
                 ImGui::GetFrameCount(), categories[counter % IM_ARRAYSIZE(categories)], ImGui::GetTime(), words[counter % IM_ARRAYSIZE(words)]);
-
             counter++;
         }
     }
@@ -4028,9 +4024,6 @@ static void ShowExampleAppLog(bool* p_open)
     // Actually call in the regular Log helper (which will Begin() into the same window as we just did)
     log.Draw("Example: Log", p_open);
 }
-
-
-
 
 //-----------------------------------------------------------------------------
 // [SECTION] Example App: Simple Layout / ShowExampleAppLayout()
