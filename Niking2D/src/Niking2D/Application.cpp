@@ -6,6 +6,7 @@
 #include <glad/glad.h>
 
 
+
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
 namespace Niking2D {
@@ -47,6 +48,7 @@ namespace Niking2D {
 			for (Layer* layer : m_LayerStack) {
 				layer->OnImGuiRender();
 			}
+
 			m_ImGuiLayer->End();
 			
 			//auto[x, y] = Input::GetMousePosition();
