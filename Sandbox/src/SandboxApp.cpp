@@ -37,7 +37,7 @@ class Sandbox : public Niking2D::Application {
 public:
 	Sandbox() {
 		PushLayer(new ExampleLayer());
-		PushOverLayer(new Niking2D::ImGuiLayer());
+		//PushOverLayer(new Niking2D::ImGuiLayer());
 		
 	}
 	

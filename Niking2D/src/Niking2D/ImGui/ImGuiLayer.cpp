@@ -2,8 +2,10 @@
 #include "ImGuiLayer.h"
 
 #include "imgui.h"
-#include "Platform/OpenGL/ImGuiOpenGLRenderer.h"
+#include <dock/imgui_impl_glfw.h>
+#include <dock/imgui_impl_opengl3.h>
 #include "Niking2D/Application.h"
+
 
 
 #include "GLFW/glfw3.h"
@@ -15,9 +17,6 @@ namespace Niking2D {
 	{
 	}
 
-	ImGuiLayer::~ImGuiLayer()
-	{
-	}
 
 	void ImGuiLayer::OnAttach()
 	{
@@ -53,37 +52,100 @@ namespace Niking2D {
 		io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 		io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
 
-		ImGui_ImplOpenGL3_Init("#version 410");;
+
+		io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
+//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
+
+		Application& app = Application::Get();
+		GLFWwindow* window = static_cast<GLFWwindow*>(app.GetWindow().GetNativeWindow());
+
+
+		ImGui_ImplGlfw_InitForOpenGL(window, true);
+
+		ImGui_ImplOpenGL3_Init("#version 410");
+
 	}
 
 
 	void ImGuiLayer::OnDetach()
 	{
-		
+
+		ImGui_ImplOpenGL3_Shutdown();
+		ImGui_ImplGlfw_Shutdown();
+		ImGui::DestroyContext();
+	}
+
+	void ImGuiLayer::Begin()
+	{
+
+		ImGui_ImplOpenGL3_NewFrame();
+		ImGui_ImplGlfw_NewFrame();
+		ImGui::NewFrame();
+	}
+
+	void ImGuiLayer::OnImGuiRender()
+	{
+		static bool show = true;
+		ImGui::ShowDemoWindow(&show);
+
+	}
+
+
+
+	void ImGuiLayer::End()
+	{
+
+		ImGuiIO& io = ImGui::GetIO();
+		Application& app = Application::Get();
+		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
+
+		// Rendering
+		ImGui::Render();
+		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			GLFWwindow* backup_current_context = glfwGetCurrentContext();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
+			glfwMakeContextCurrent(backup_current_context);
+		}
 	}
 
 	void ImGuiLayer::OnUpdate()
 	{
 
 
-		ImGuiIO& io = ImGui::GetIO();
+		//ImGuiIO& io = ImGui::GetIO();
 
 
-		Application& app = Application::Get();
-		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+		//Application& app = Application::Get();
+		//io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
 
-		float time = (float)glfwGetTime();
-		io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
-		m_Time = time;
+		//float time = (float)glfwGetTime();
+		//io.DeltaTime = m_Time > 0.0f ? (time - m_Time) : (1.0f / 60.0f);
+		//m_Time = time;
 
-		ImGui_ImplOpenGL3_NewFrame();
-		ImGui::NewFrame();
+		//ImGui_ImplOpenGL3_NewFrame();
+		//ImGui::NewFrame();
 
-		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		//static bool show = true;
+		//ImGui::ShowDemoWindow(&show);
 
-		ImGui::Render();
-		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+		//ImGui::Render();
+		//ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+	
 	}
 
 	void ImGuiLayer::OnEvent(Event & event)
@@ -119,6 +181,7 @@ namespace Niking2D {
 	{
 
 		ImGuiIO& io = ImGui::GetIO();
+		
 		io.MouseDown[e.GetMouseButton()] = true;
 
 		return false;

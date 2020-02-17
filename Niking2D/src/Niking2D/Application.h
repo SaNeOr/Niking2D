@@ -8,6 +8,8 @@
 #include "Events/ApplicationEvent.h"
 #include "Niking2D/Input.h"
 
+#include "Niking2D/ImGui/ImGuiLayer.h"
+
 namespace Niking2D {
 	class N2_API Application
 	{
@@ -44,6 +46,9 @@ namespace Niking2D {
 	private:
 		static Application* s_Instance;
 		std::unique_ptr<Window> m_Window;
+
+		ImGuiLayer* m_ImGuiLayer;
+
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 	};
