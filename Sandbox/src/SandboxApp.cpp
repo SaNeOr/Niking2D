@@ -1,6 +1,5 @@
 #include <Niking2D.h>
-
-
+#include "imgui.h"
 
 class ExampleLayer :public Niking2D::Layer {
 public:
@@ -13,10 +12,21 @@ public:
 	void OnUpdate() override {
 		//N2_CLIENT_INFO("ExampleLayer::Update");
 
+
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_TAB)) {
 			N2_CLIENT_TRACE("Tab Key is pressed!");
 		}
 	}
+
+	virtual void OnImGuiRender() override {
+		ImGui::Begin("Test");
+		ImGui::Text("Hello World");
+		ImGui::ColorEdit4("", new float[4]);
+		ImGui::End();
+
+
+	}
+
 
 	void OnEvent(Niking2D::Event& event) override {
 		//N2_CLIENT_TRACE("{0}", event);

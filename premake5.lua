@@ -23,8 +23,11 @@ workspace "Niking2D"
 
 	project "Niking2D"
 		location "Niking2D"
-		kind "SharedLib"
+		kind "StaticLib"
 		language "C++"
+		cppdialect "c++17"
+		staticruntime "on"
+
 
 		targetdir("bin/" .. outputdir .. "/%{prj.name}")
 		objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -54,7 +57,6 @@ workspace "Niking2D"
 		}
 
 		filter "system:windows"
-			cppdialect "c++17"
 			staticruntime "on"
 			systemversion "latest"
 
@@ -64,24 +66,20 @@ workspace "Niking2D"
 			"N2_BUILD_DLL",
 			"GLFW_INCLUDE_NONE"
 		}
-
-		postbuildcommands{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
 		
 		filter "configurations:Debug"
 			defines "N2_DEBUG"
-			buildoptions "/MDd"
+			runtime "Debug"
 			symbols "on"
 
 		filter "configurations:Release"
 			defines "N2_RELEASE"
-			buildoptions "/MD"
+			runtime "Release"
 			optimize "on"
 
 		filter "configurations:Dist"
 			defines "N2_DIST"
-			buildoptions "/MD"
+			runtime "Release"
 			symbols "on"
 
 
@@ -90,6 +88,9 @@ workspace "Niking2D"
 		location "Sandbox"
 		kind "ConsoleApp"
 		language "C++"
+		cppdialect "c++17"
+		staticruntime "on"
+		
 
 		targetdir("bin/" .. outputdir .. "/%{prj.name}")
 		objdir("bin-int/" .. outputdir .. "/%{prj.name}")
@@ -101,7 +102,8 @@ workspace "Niking2D"
 
 		includedirs{
 			"Niking2D/vendor/spdlog/include",
-			"Niking2D/src"
+			"Niking2D/vendor/imgui",
+			"Niking2D/src",
 		}
 
 		links{
@@ -109,7 +111,6 @@ workspace "Niking2D"
 		}
 
 		filter "system:windows"
-			cppdialect "c++17"
 			staticruntime "on"
 			systemversion "latest"
 
@@ -119,15 +120,15 @@ workspace "Niking2D"
 
 		filter "configurations:Debug"
 			defines "N2_DEBUG"
-			buildoptions "/MDd"
+			runtime "Debug"
 			symbols "on"
 
 		filter "configurations:Release"
 			defines "N2_RELEASE"
-			buildoptions "/MD"
+			runtime "Release"
 			optimize "on"
 
 		filter "configurations:Dist"
 			defines "N2_DIST"
-			buildoptions "/MD"
+			runtime "Release"
 			symbols "on"
