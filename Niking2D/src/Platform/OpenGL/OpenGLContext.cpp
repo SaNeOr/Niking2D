@@ -15,7 +15,17 @@ namespace Niking2D {
 	{
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
+
 		N2_CORE_ASSERT(status, "Failed to initialized Glad!");
+
+
+		N2_CORE_INFO("OpenGL Info:"); 
+		N2_CORE_INFO("	Vendor: {0}", glGetString(GL_VENDOR));
+		N2_CORE_INFO("	Renderer: {0}", glGetString(GL_RENDERER));
+		N2_CORE_INFO("	Version: {0}", glGetString(GL_VERSION));
+
+
+
 	}
 	void OpenGLContext::SwapBuffers()
 	{	

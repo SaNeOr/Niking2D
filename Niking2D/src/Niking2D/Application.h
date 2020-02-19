@@ -51,6 +51,10 @@ namespace Niking2D {
 
 		bool m_Running = true;
 		LayerStack m_LayerStack;
+
+		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		
+		unsigned int m_Shader;
 	};
 
 

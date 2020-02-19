@@ -26,6 +26,63 @@ namespace Niking2D {
 
 		PushOverLayer(m_ImGuiLayer);
 
+		glGenVertexArrays(1, &m_VertexArray);
+		glBindVertexArray(m_VertexArray);
+
+		glGenBuffers(1, &m_VertexBuffer);
+		glBindBuffer(GL_ARRAY_BUFFER, m_VertexBuffer);
+
+		float vertices[3 * 3] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			  0.0f, 0.5f, 0.0f
+		};
+
+		glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
+
+		glEnableVertexAttribArray(0);
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+		glGenBuffers(1, &m_IndexBuffer);
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_IndexBuffer);
+
+		unsigned int indices[3] = {
+			0,1,2
+		};
+
+		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+		//unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
+		//const char* vertexSource =
+		//	"#version 330 core"\
+		//	"layout(location = 0) in vec3 position;"\
+		//	"void main(){"\
+		//	"	gl_Position = vec4(position.x, position.y, position.z, 1.0);"\
+		//	"};";
+
+		//glShaderSource(vertex, 1, &vertexSource, nullptr);
+		//glCompileShader(vertex);
+
+		//unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		//const char* fragmentSource =
+		//	"#version 330 core"\
+		//	"out vec4 FragColor;"\
+		//	"void main(){"\
+		//	"	FragColor  = vec4(1.0, 0.0, 0.0, 1.0);"\
+		//	"};";
+
+		//glShaderSource(fragment, 1, &fragmentSource, nullptr);
+		//glCompileShader(fragment);
+
+		//m_Shader = glCreateProgram();
+
+		//glAttachShader(m_Shader, vertex);
+		//glAttachShader(m_Shader, fragment);
+		//glLinkProgram(m_Shader);
+
+		//glUseProgram(m_Shader);
+
+
  	}
 
 	Application::~Application()
@@ -37,11 +94,19 @@ namespace Niking2D {
 
 		while (m_Running) {
 
+			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
-			//for (Layer* layer : m_LayerStack) {
-			//	layer->OnUpdate();
-			//}
+
+			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
+
+			glBindVertexArray(m_VertexArray);
+
+			
+
+		/*	for (Layer* layer : m_LayerStack) {
+				layer->OnUpdate();
+			}*/
 
 			m_ImGuiLayer->Begin();
 
@@ -72,7 +137,7 @@ namespace Niking2D {
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
 
-		N2_CORE_TRACE("{0}", e);
+		//N2_CORE_TRACE("{0}", e);
 
 		for (auto it = m_LayerStack.end(); it != m_LayerStack.begin(); ) {
 			(*--it)->OnEvent(e);
@@ -99,3 +164,4 @@ namespace Niking2D {
 		layer->OnAttach();
 	}
 }
+
