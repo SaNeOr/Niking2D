@@ -7,6 +7,7 @@
 
 #include "Niking2D/Renderer/GraphicsContext.h"
 
+
 namespace Niking2D {
 	class WindowsWindow : public Window {
 	public:

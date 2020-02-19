@@ -9,6 +9,8 @@
 #include "Niking2D/Input.h"
 
 #include "Niking2D/ImGui/ImGuiLayer.h"
+#include "Niking2D/Renderer/Shader.h"
+
 
 namespace Niking2D {
 	class N2_API Application
@@ -54,7 +56,8 @@ namespace Niking2D {
 
 		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
 		
-		unsigned int m_Shader;
+		//unsigned int m_Shader;
+		std::unique_ptr<Shader> m_Shader;
 	};
 
 

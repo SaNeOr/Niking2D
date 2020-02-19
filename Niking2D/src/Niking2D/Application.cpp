@@ -52,38 +52,63 @@ namespace Niking2D {
 
 		glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
-		//unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
-		//const char* vertexSource =
-		//	"#version 330 core"\
-		//	"layout(location = 0) in vec3 position;"\
-		//	"void main(){"\
-		//	"	gl_Position = vec4(position.x, position.y, position.z, 1.0);"\
-		//	"};";
+	/*	unsigned int vertex = glCreateShader(GL_VERTEX_SHADER);
+		const char* vertexSource =
+			"#version 330 core\n"
+			"layout(location = 0) in vec3 position;\n"\
+			"void main(){\n"\
+			"	gl_Position = vec4(position.x, position.y, position.z, 1.0);\n"\
+			"};";
 
-		//glShaderSource(vertex, 1, &vertexSource, nullptr);
-		//glCompileShader(vertex);
+		glShaderSource(vertex, 1, &vertexSource, nullptr);
+		glCompileShader(vertex);
 
-		//unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);
-		//const char* fragmentSource =
-		//	"#version 330 core"\
-		//	"out vec4 FragColor;"\
-		//	"void main(){"\
-		//	"	FragColor  = vec4(1.0, 0.0, 0.0, 1.0);"\
-		//	"};";
+		unsigned int fragment = glCreateShader(GL_FRAGMENT_SHADER);
+		const char* fragmentSource =
+			"#version 330 core\n"\
+			"out vec4 FragColor;\n"\
+			"void main(){\n"\
+			"	FragColor  = vec4(1.0, 0.0, 0.0, 1.0);\n"\
+			"};";
 
-		//glShaderSource(fragment, 1, &fragmentSource, nullptr);
-		//glCompileShader(fragment);
+		glShaderSource(fragment, 1, &fragmentSource, nullptr);
+		glCompileShader(fragment);
 
-		//m_Shader = glCreateProgram();
+		m_Shader = glCreateProgram();
 
-		//glAttachShader(m_Shader, vertex);
-		//glAttachShader(m_Shader, fragment);
-		//glLinkProgram(m_Shader);
+		glAttachShader(m_Shader, vertex);
+		glAttachShader(m_Shader, fragment);
+		glLinkProgram(m_Shader);
 
-		//glUseProgram(m_Shader);
+		glUseProgram(m_Shader);*/
+		
+		std::string vertexSrc = R"(
+			#version 330 core
 
+			layout(location = 0 ) in vec3 a_Position;
+			out vec3 v_Position;
+			void main(){
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string fragSrc = R"(
+			#version 330 core
+			
+			out vec4 color;
+			in vec3 v_Position;
+			void main(){
+				color = vec4(v_Position + 0.5 , 1.0);
+				
+			}
+		)";
+
+		m_Shader.reset(new Shader(vertexSrc, fragSrc));
 
  	}
+
+
 
 	Application::~Application()
 	{
@@ -98,9 +123,10 @@ namespace Niking2D {
 			glClear(GL_COLOR_BUFFER_BIT);
 
 
+			m_Shader->Bind();
+			glBindVertexArray(m_VertexArray);
 			glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, nullptr);
 
-			glBindVertexArray(m_VertexArray);
 
 			
 

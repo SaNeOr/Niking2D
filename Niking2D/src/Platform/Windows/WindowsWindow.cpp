@@ -11,7 +11,6 @@
 
 #include "Platform/OpenGL/OpenGLContext.h"
 
-
 namespace Niking2D {
 
 	static bool s_GLFWInitialized = false;
