@@ -8,7 +8,8 @@
 #include "Niking2D/Events/MouseEvent.h"
 #include "Niking2D/Events/KeyEvent.h"
 
-#include <glad/glad.h>
+
+#include "Platform/OpenGL/OpenGLContext.h"
 
 
 namespace Niking2D {
@@ -37,7 +38,9 @@ namespace Niking2D {
 	void WindowsWindow::OnUpdate()
 	{
 		glfwPollEvents();
-		glfwSwapBuffers(m_Window);
+
+		m_Context->SwapBuffers();
+
 	}
 
 	void WindowsWindow::SetVSync(bool enable)
@@ -63,7 +66,10 @@ namespace Niking2D {
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
 
+
+
 		N2_CORE_INFO("Create Window {0} ({1}, {2})", props.Title, props.Width, props.Height);
+
 
 		if (!s_GLFWInitialized) {
 
@@ -73,11 +79,13 @@ namespace Niking2D {
 			s_GLFWInitialized = true;
 		}
 
-		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Titile.c_str(), nullptr, nullptr);
-		glfwMakeContextCurrent(m_Window);
 
-		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
-		N2_CORE_ASSERT(status, "Failed to initialized Glad!");
+		m_Window = glfwCreateWindow((int)m_Data.Width, (int)m_Data.Height, m_Data.Titile.c_str(), nullptr, nullptr);
+
+		m_Context = new OpenGLContext(m_Window);
+		m_Context->Init();
+
+
 
 
 		glfwSetWindowUserPointer(m_Window, &m_Data);

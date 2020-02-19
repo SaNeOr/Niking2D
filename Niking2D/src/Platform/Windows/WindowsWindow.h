@@ -5,6 +5,8 @@
 #include <GLFW/glfw3.h>
 
 
+#include "Niking2D/Renderer/GraphicsContext.h"
+
 namespace Niking2D {
 	class WindowsWindow : public Window {
 	public:
@@ -29,6 +31,8 @@ namespace Niking2D {
 
 	private:
 		GLFWwindow* m_Window;
+		GraphicsContext* m_Context;
+
 
 		struct WindowData
 		{
