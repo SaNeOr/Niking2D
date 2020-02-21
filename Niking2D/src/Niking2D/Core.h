@@ -17,8 +17,8 @@
 
 
 #ifdef N2_ENABLE_ASSERTS
-	#define N2_ASSERT(x, ...) {if(!(x)) {N2_CLIENT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();)}}
-	#define N2_CORE_ASSERT(x, ...) {if(!(x)) {N2_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();)}}
+	#define N2_ASSERT(x, ...) {if(!(x)) {N2_CLIENT_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
+	#define N2_CORE_ASSERT(x, ...) {if(!(x)) {N2_CORE_ERROR("Assertion Failed: {0}", __VA_ARGS__); __debugbreak();}}
 #else
 	#define N2_ASSERT(x, ...)
 	#define N2_CORE_ASSERT(x, ...)

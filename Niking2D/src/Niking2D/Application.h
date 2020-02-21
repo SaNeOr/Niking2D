@@ -10,6 +10,7 @@
 
 #include "Niking2D/ImGui/ImGuiLayer.h"
 #include "Niking2D/Renderer/Shader.h"
+#include "Niking2D/Renderer/Buffer.h"
 
 
 namespace Niking2D {
@@ -54,10 +55,12 @@ namespace Niking2D {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray, m_VertexBuffer, m_IndexBuffer;
+		unsigned int m_VertexArray;
 		
 		//unsigned int m_Shader;
 		std::unique_ptr<Shader> m_Shader;
+		std::unique_ptr<VertexBuffer> m_VertexBuffer;
+		std::unique_ptr<IndexBuffer> m_IndexBuffer;
 	};
 
 
