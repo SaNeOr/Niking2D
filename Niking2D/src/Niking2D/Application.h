@@ -11,7 +11,7 @@
 #include "Niking2D/ImGui/ImGuiLayer.h"
 #include "Niking2D/Renderer/Shader.h"
 #include "Niking2D/Renderer/Buffer.h"
-
+#include "Niking2D/Renderer/VertexArray.h"
 
 namespace Niking2D {
 	class N2_API Application
@@ -55,12 +55,14 @@ namespace Niking2D {
 		bool m_Running = true;
 		LayerStack m_LayerStack;
 
-		unsigned int m_VertexArray;
 		
 		//unsigned int m_Shader;
-		std::unique_ptr<Shader> m_Shader;
-		std::unique_ptr<VertexBuffer> m_VertexBuffer;
-		std::unique_ptr<IndexBuffer> m_IndexBuffer;
+		std::shared_ptr<Shader> m_Shader;
+
+
+		std::shared_ptr<VertexArray> m_VertexArray;
+		std::shared_ptr<Shader> m_BludeShader;
+		std::shared_ptr<VertexArray> m_SquareVA;
 	};
 
 

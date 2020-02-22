@@ -11,24 +11,7 @@ namespace Niking2D {
 
 	Application* Application::s_Instance = nullptr;
 
-	static GLenum ShaderDataTypeToOpenGLBaseType(ShaderDataType type) {
-		switch (type)
-		{
-			case Niking2D::ShaderDataType::Float:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Float2:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Float3:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Float4:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Mat3:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Mat4:		return GL_FLOAT;
-			case Niking2D::ShaderDataType::Int:			return GL_INT;
-			case Niking2D::ShaderDataType::Int2:		return GL_INT;
-			case Niking2D::ShaderDataType::Int3:		return GL_INT;
-			case Niking2D::ShaderDataType::Int4:		return GL_INT;
-			case Niking2D::ShaderDataType::Bool:		return GL_BOOL;
-		}
-		N2_CORE_ASSERT(false, "Unkonwn ShaderDataType!");
-		return 0;
-	}
+
 
 	Application::Application()
 	{
@@ -42,15 +25,14 @@ namespace Niking2D {
 
 		PushOverLayer(m_ImGuiLayer);
 
-		glGenVertexArrays(1, &m_VertexArray);
-		glBindVertexArray(m_VertexArray);
+		m_VertexArray.reset(VertexArray::Create());
 
 		float vertices[3 * 7] = {
 			-0.5f, -0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f,
 			 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 			  0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 		};
-
+		std::shared_ptr<VertexBuffer> m_VertexBuffer;
 		m_VertexBuffer.reset(VertexBuffer::Create(vertices, sizeof(vertices)));
 		
 		{
@@ -62,28 +44,45 @@ namespace Niking2D {
 			m_VertexBuffer->SetLayout(layout);
 		}
 
-		unsigned int index = 0;
-		const auto& layout = m_VertexBuffer->GetLayout();
-		for (const auto& element : layout) {
 
-			glEnableVertexAttribArray(index);
-			glVertexAttribPointer(index, element.GetComponementCount(), ShaderDataTypeToOpenGLBaseType(element.Type), 
-				element.Normalized ? GL_TRUE : GL_FALSE, 
-				//element.Size ,
-				layout.GetStride(),
-				(const void*)element.Offset);
-			index++;
-		}
-
-
-
+		m_VertexArray->AddVertexBuffer(m_VertexBuffer);
 
 		unsigned int indices[3] = {
 			0,1,2
 		};
-
+		std::shared_ptr<IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
+
+		m_SquareVA.reset(VertexArray::Create());
+		float squareVertices[4 * 3] = {
+			-0.5f, -0.5f, 0.0f,
+			 0.5f, -0.5f, 0.0f,
+			 0.5f, 0.5f,  0.0f,
+			-0.5f, 0.5f,  0.0f,
+		};
+
+		std::shared_ptr<VertexBuffer> squareVB;
+		squareVB.reset(VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+
+		{
+			BufferLayout layout = {
+				{ShaderDataType::Float3, "a_Position"},
+			};
+			squareVB->SetLayout(layout);
+		}
+		m_SquareVA->AddVertexBuffer(squareVB);
+		unsigned int squareIndices[2*3] = {
+			0,1,2,
+			2,3,0
+		};
+		std::shared_ptr<IndexBuffer> squareIB;
 		
+		squareIB.reset(IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int)));
+		
+		m_SquareVA->SetIndexBuffer(squareIB);
+
+
 		std::string vertexSrc = R"(
 			#version 330 core
 
@@ -112,9 +111,40 @@ namespace Niking2D {
 				color = v_Color;
 				
 			}
+		)";		
+		
+		std::string blueShaderVertexSrc = R"(
+			#version 330 core
+
+			layout(location = 0 ) in vec3 a_Position;
+			layout(location = 1 ) in vec4 a_Color;
+
+			out vec3 v_Position;
+			out vec4 v_Color;
+
+			void main(){
+				v_Position = a_Position;
+				gl_Position = vec4(a_Position, 1.0);
+				v_Color = a_Color;
+			}
 		)";
 
+		std::string blueShaderfragSrc = R"(
+			#version 330 core
+			out vec4 color;
+
+			in vec4 v_Color;
+			in vec3 v_Position;
+
+			void main(){
+				color = vec4(v_Position + 0.5 , 1.0);
+				color = vec4(0.2, 0.3, 0.8, 1.0);
+				
+			}
+		)";
+		   
 		m_Shader.reset(new Shader(vertexSrc, fragSrc));
+		m_BludeShader.reset(new Shader(blueShaderVertexSrc, blueShaderfragSrc));
 
  	}
 
@@ -132,10 +162,13 @@ namespace Niking2D {
 			glClearColor(0.1f, 0.1f, 0.1f, 1);
 			glClear(GL_COLOR_BUFFER_BIT);
 
+			m_SquareVA->Bind();
+			m_BludeShader->Bind();
+			glDrawElements(GL_TRIANGLES, m_SquareVA->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 			m_Shader->Bind();
-			glBindVertexArray(m_VertexArray);
-			glDrawElements(GL_TRIANGLES, m_IndexBuffer->GetCount(), GL_UNSIGNED_INT, nullptr);
+			m_VertexArray->Bind();
+			glDrawElements(GL_TRIANGLES, m_VertexArray->GetIndexBuffers()->GetCount(), GL_UNSIGNED_INT, nullptr);
 
 
 			
