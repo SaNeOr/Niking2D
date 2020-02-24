@@ -14,7 +14,7 @@ namespace Niking2D {
 		virtual void SetIndexBuffer(const std::shared_ptr< IndexBuffer>& indexBuffer) = 0;
 
 		virtual const std::vector<std::shared_ptr<VertexBuffer> >& GetVertexBuffers() const = 0;
-		virtual const std::shared_ptr<IndexBuffer> & GetIndexBuffers() const = 0;
+		virtual const std::shared_ptr<IndexBuffer>& GetIndexBuffers() const = 0;
 
 		static VertexArray* Create();
 	};

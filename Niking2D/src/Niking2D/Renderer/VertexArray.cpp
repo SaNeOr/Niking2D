@@ -8,9 +8,8 @@ namespace Niking2D {
 	VertexArray* Niking2D::VertexArray::Create()
 	{
 		switch (Renderer::GetAPI()) {
-
-		case RendererAPI::None: {N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-		case RendererAPI::OpenGL:		return new OpenGLVertexArray();
+			case RendererAPI::API::None: {N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
+			case RendererAPI::API::OpenGL:		return new OpenGLVertexArray();
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");

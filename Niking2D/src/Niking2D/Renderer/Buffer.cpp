@@ -10,8 +10,8 @@ namespace Niking2D {
 	{
 		switch (Renderer::GetAPI()){
 		
-			case RendererAPI::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-			case RendererAPI::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
+			case RendererAPI::API::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");
@@ -23,8 +23,8 @@ namespace Niking2D {
 	{
 		switch (Renderer::GetAPI()) {
 
-		case RendererAPI::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-		case RendererAPI::OpenGL:		return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
+		case RendererAPI::API::OpenGL:		return new OpenGLIndexBuffer(indices, size);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");

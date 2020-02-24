@@ -15,6 +15,7 @@ workspace "Niking2D"
 	IncludeDir["GLFW"] = "Niking2D/vendor/GLFW/include"
 	IncludeDir["Glad"] = "Niking2D/vendor/Glad/include"
 	IncludeDir["ImGui"]= "Niking2D/vendor/imgui"
+	IncludeDir["glm"]  = "Niking2D/vendor/glm"
 
 	-- runs "%{prj.name}/vendor/GLFW/premake5.lua"
 	include "Niking2D/vendor/GLFW"
@@ -53,7 +54,9 @@ workspace "Niking2D"
 			"%{prj.name}/vendor/spdlog/include",
 			"%{IncludeDir.GLFW}",
 			"%{IncludeDir.Glad}",
-			"%{IncludeDir.ImGui}"
+			"%{IncludeDir.ImGui}",
+			"%{IncludeDir.glm}",
+
 		}
 
 		filter "system:windows"
