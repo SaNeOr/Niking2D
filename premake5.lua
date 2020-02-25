@@ -39,7 +39,9 @@ workspace "Niking2D"
 
 		files{
 			"%{prj.name}/src/**.h",
-			"%{prj.name}/src/**.cpp"
+			"%{prj.name}/src/**.cpp",
+			"%{prj.name}/vendor/glm/glm/**.hpp",
+			"%{prj.name}/vendor/glm/glm/**.inl",
 		}
 
 		links{
@@ -107,6 +109,7 @@ workspace "Niking2D"
 			"Niking2D/vendor/spdlog/include",
 			"Niking2D/vendor/imgui",
 			"Niking2D/src",
+			"%{IncludeDir.glm}"
 		}
 
 		links{

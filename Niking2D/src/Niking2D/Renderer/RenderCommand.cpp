@@ -5,6 +5,6 @@
 
 namespace Niking2D {
 
-	RendererAPI* RenderCommand::s_RendererAPI = new OpenGLRendererAPI();
+	RendererAPI* RenderCommand::s_RendererAPI =  RendererAPI::GetAPI() == RendererAPI::API::OpenGL?  new OpenGLRendererAPI(): nullptr;
 
 }

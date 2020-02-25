@@ -17,9 +17,7 @@ namespace Niking2D {
 
 
 		inline static void DrawIndexed(const std::shared_ptr<VertexArray>& vertexArrary) {
-
 			s_RendererAPI->DrawIndexed(vertexArrary);
-
 		}
 
 	private:

@@ -12,6 +12,9 @@
 #include "Niking2D/Renderer/Shader.h"
 #include "Niking2D/Renderer/Buffer.h"
 #include "Niking2D/Renderer/VertexArray.h"
+#include "Niking2D/Renderer/OrthographicCamera.h"
+
+
 
 namespace Niking2D {
 	class N2_API Application
@@ -63,6 +66,8 @@ namespace Niking2D {
 		std::shared_ptr<VertexArray> m_VertexArray;
 		std::shared_ptr<Shader> m_BludeShader;
 		std::shared_ptr<VertexArray> m_SquareVA;
+
+		OrthograhicCamera m_Camera;
 	};
 
 
