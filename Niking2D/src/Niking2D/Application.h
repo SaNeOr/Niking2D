@@ -9,11 +9,6 @@
 #include "Niking2D/Input.h"
 
 #include "Niking2D/ImGui/ImGuiLayer.h"
-#include "Niking2D/Renderer/Shader.h"
-#include "Niking2D/Renderer/Buffer.h"
-#include "Niking2D/Renderer/VertexArray.h"
-#include "Niking2D/Renderer/OrthographicCamera.h"
-
 
 
 namespace Niking2D {
