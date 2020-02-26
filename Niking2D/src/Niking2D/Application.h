@@ -60,14 +60,7 @@ namespace Niking2D {
 
 		
 		//unsigned int m_Shader;
-		std::shared_ptr<Shader> m_Shader;
 
-
-		std::shared_ptr<VertexArray> m_VertexArray;
-		std::shared_ptr<Shader> m_BludeShader;
-		std::shared_ptr<VertexArray> m_SquareVA;
-
-		OrthograhicCamera m_Camera;
 	};
 
 

@@ -13,7 +13,18 @@
 #include "Niking2D/Log.h"
 
 
+//	----Renderer Head Files-----------
+#include "Niking2D/Renderer/Renderer.h"
+#include "Niking2D/Renderer/RenderCommand.h"
+
+#include "Niking2D/Renderer/Buffer.h"
+#include "Niking2D/Renderer/Shader.h"
+#include "Niking2D/Renderer/VertexArray.h"
+
+#include "Niking2D/Renderer/OrthographicCamera.h"
+// ----------------------------------
+
+
 // ----Entry Point-------------------
 #include "Niking2D/EntryPoint.h"
-
 // ----------------------------------
