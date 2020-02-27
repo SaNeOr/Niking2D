@@ -12,6 +12,8 @@
 #include "Niking2D/Layer.h" 
 #include "Niking2D/Log.h"
 
+#include "Niking2D/Core/Timestep.h"
+
 
 //	----Renderer Head Files-----------
 #include "Niking2D/Renderer/Renderer.h"

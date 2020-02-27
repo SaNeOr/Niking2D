@@ -9,6 +9,8 @@
 #include "Niking2D/Input.h"
 
 #include "Niking2D/ImGui/ImGuiLayer.h"
+#include "Niking2D/Core/Timestep.h"
+
 
 
 namespace Niking2D {
@@ -37,12 +39,10 @@ namespace Niking2D {
 
 
 
-		inline static Application& Get() {
-			return *s_Instance;
-		}
-		inline Window& GetWindow() {
-			return *m_Window;
-		}
+		inline static Application& Get() {return *s_Instance;}
+
+		inline Window& GetWindow() {return *m_Window;}
+
 
 	private:
 		static Application* s_Instance;
@@ -52,13 +52,10 @@ namespace Niking2D {
 
 		bool m_Running = true;
 		LayerStack m_LayerStack;
-
 		
-		//unsigned int m_Shader;
+		float m_LastFrameTime = 0.0f;
 
 	};
-
-
 
 	//	To be defined in CLIENT
 	Application* CreateApplication();

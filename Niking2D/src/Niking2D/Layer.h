@@ -2,7 +2,7 @@
 
 #include "Niking2D/Core.h"
 #include "Niking2D/Events/Event.h"
-
+#include "Niking2D/Core/Timestep.h"
 
 namespace Niking2D {
 
@@ -13,7 +13,7 @@ namespace Niking2D {
 		
 		virtual void OnAttach() {}
 		virtual void OnDetach() {}
-		virtual void OnUpdate() {}
+		virtual void OnUpdate(Timestep ts) {}
 
 		virtual void OnImGuiRender() {}
 

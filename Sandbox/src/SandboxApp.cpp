@@ -132,33 +132,35 @@ public:
 		m_BludeShader.reset(new Niking2D::Shader(blueShaderVertexSrc, blueShaderfragSrc));
 	}
 
-	void OnUpdate() override {
+	void OnUpdate(Niking2D::Timestep ts) override {
 		//N2_CLIENT_INFO("ExampleLayer::Update");
 		//if (Niking2D::Input::IsKeyPressed(N2_KEY_TAB)) {
 		//	N2_CLIENT_TRACE("Tab Key is pressed!");
 		//}
 
+		N2_CORE_TRACE("Delta time :{0}s ({1}ms)", ts.GetSeconds(), ts.GetMillseconds());
+
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_LEFT)) {
-			m_CameraPosition.x -= m_CameraMoveSpeed;
+			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
 
 		}
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_RIGHT)) {
-			m_CameraPosition.x += m_CameraMoveSpeed;
+			m_CameraPosition.x += m_CameraMoveSpeed * ts;
 
 		}
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_DOWN)) {
-			m_CameraPosition.y -= m_CameraMoveSpeed;
+			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
 
 		}
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_UP)) {
-			m_CameraPosition.y += m_CameraMoveSpeed;
+			m_CameraPosition.y += m_CameraMoveSpeed * ts;
 		}
 
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_A)) {
-			m_CameraRotation += m_CameraRotationSpeed;
+			m_CameraRotation += m_CameraRotationSpeed * ts;
 		}
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_D)) {
-			m_CameraRotation -= m_CameraRotationSpeed;
+			m_CameraRotation -= m_CameraRotationSpeed * ts;
 		}
 
 
@@ -241,8 +243,8 @@ private:
 
 	float m_CameraRotation = 0.0f;
 
-	float m_CameraMoveSpeed = 0.1f;
-	float m_CameraRotationSpeed = 2.0f;
+	float m_CameraMoveSpeed = 5.0f;
+	float m_CameraRotationSpeed = 100.0f;
 
 };
 
