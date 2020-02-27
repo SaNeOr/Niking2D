@@ -6,4 +6,4 @@
 	url = https://github.com/g-truc/glm
 [submodule "Niking2d/vendor/spdlog"]
 	path = Niking2d/vendor/spdlog
-	url = https://github.com/gabime/spdlog
+	url = https://github.com/SaNeOr/spdlog
