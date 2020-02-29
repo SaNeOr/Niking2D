@@ -2,6 +2,7 @@
 
 #include "Renderer.h"
 
+#include "Platform/OpenGL/OpenGLShader.h"
 
 namespace Niking2D {
 
@@ -20,9 +21,12 @@ namespace Niking2D {
 	{
 		shader->Bind();
 		vertexArrary->Bind();
-		shader->UploadUniformMat4("u_ViewProjection", Renderer::m_SceneData->ViewProjectionMatrix);
+		
+		
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_ViewProjection", Renderer::m_SceneData->ViewProjectionMatrix);
 
-		shader->UploadUniformMat4("u_Transform", transform);
+		std::dynamic_pointer_cast<OpenGLShader>(shader)->UploadUniformMat4("u_Transform", transform);
+
 
 		RenderCommand::DrawIndexed(vertexArrary);
 	}
