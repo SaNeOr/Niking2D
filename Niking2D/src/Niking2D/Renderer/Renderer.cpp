@@ -16,11 +16,13 @@ namespace Niking2D {
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader,const std::shared_ptr<VertexArray>& vertexArrary)
+	void Renderer::Submit(const std::shared_ptr<Shader>& shader,const std::shared_ptr<VertexArray>& vertexArrary, const glm::mat4& transform)
 	{
 		shader->Bind();
 		vertexArrary->Bind();
 		shader->UploadUniformMat4("u_ViewProjection", Renderer::m_SceneData->ViewProjectionMatrix);
+
+		shader->UploadUniformMat4("u_Transform", transform);
 
 		RenderCommand::DrawIndexed(vertexArrary);
 	}
