@@ -17,7 +17,7 @@ namespace Niking2D {
 	{
 	}
 
-	void Renderer::Submit(const std::shared_ptr<Shader>& shader,const std::shared_ptr<VertexArray>& vertexArrary, const glm::mat4& transform)
+	void Renderer::Submit(const Ref<Shader>& shader,const Ref<VertexArray>& vertexArrary, const glm::mat4& transform)
 	{
 		shader->Bind();
 		vertexArrary->Bind();

@@ -1,5 +1,5 @@
 #pragma once
-
+#include <unordered_map>
 #include "Niking2D/Renderer/Shader.h"
 
 namespace Niking2D {
@@ -22,7 +22,12 @@ namespace Niking2D {
 
 		void UploadUniformMat3(const std::string& name, const glm::mat3& matrix);
 		void UploadUniformMat4(const std::string& name, const glm::mat4& matrix);
+
+	private:
+		int GetUniformLocation(const std::string& name);
 	private:
 		unsigned int m_RendererID;
+		std::unordered_map<std::string, int> m_UniformLocationCache;
+
 	};
 }

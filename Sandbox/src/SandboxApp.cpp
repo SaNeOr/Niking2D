@@ -19,7 +19,7 @@ public:
 			 0.5f, -0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 			  0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 		};
-		std::shared_ptr<Niking2D::VertexBuffer> m_VertexBuffer;
+		Niking2D::Ref <Niking2D::VertexBuffer> m_VertexBuffer;
 		m_VertexBuffer.reset(Niking2D::VertexBuffer::Create(vertices, sizeof(vertices)));
 
 		{
@@ -37,7 +37,7 @@ public:
 		unsigned int indices[3] = {
 			0,1,2
 		};
-		std::shared_ptr<Niking2D::IndexBuffer> m_IndexBuffer;
+		Niking2D::Ref<Niking2D::IndexBuffer> m_IndexBuffer;
 		m_IndexBuffer.reset(Niking2D::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
 		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
@@ -49,7 +49,7 @@ public:
 			-0.5f, 0.5f,  0.0f,
 		};
 
-		std::shared_ptr<Niking2D::VertexBuffer> squareVB;
+		Niking2D::Ref<Niking2D::VertexBuffer> squareVB;
 		squareVB.reset(Niking2D::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
 
 		{
@@ -63,7 +63,7 @@ public:
 			0,1,2,
 			2,3,0
 		};
-		std::shared_ptr<Niking2D::IndexBuffer> squareIB;
+		Niking2D::Ref<Niking2D::IndexBuffer> squareIB;
 
 		squareIB.reset(Niking2D::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int)));
 
@@ -148,7 +148,7 @@ public:
 		//	N2_CLIENT_TRACE("Tab Key is pressed!");
 		//}
 
-		N2_CORE_TRACE("Delta time :{0}s ({1}ms)", ts.GetSeconds(), ts.GetMillseconds());
+		//N2_CORE_TRACE("Delta time :{0}s ({1}ms)", ts.GetSeconds(), ts.GetMillseconds());
 
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_LEFT)) {
 			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
@@ -213,9 +213,9 @@ public:
 			for (int i = 0; i < 5; i++) {
 				glm::vec3 pos(i * 0.11f, y * 0.11f, 0.0f);
 
-		
+				
 
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) * scale;
+				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) *  glm::translate(glm::mat4(1.0f), m_SquarePosition) * scale;
 				Niking2D::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 
 			}
@@ -274,12 +274,13 @@ public:
 	}
 
 private:
-	std::shared_ptr<Niking2D::Shader> m_Shader;
+	Niking2D::Ref<Niking2D::Shader> m_Shader;
+	
 
 
-	std::shared_ptr<Niking2D::VertexArray> m_VertexArray;
-	std::shared_ptr<Niking2D::Shader> m_FlatColorShader;
-	std::shared_ptr<Niking2D::VertexArray> m_SquareVA;
+	Niking2D::Ref<Niking2D::VertexArray> m_VertexArray;
+	Niking2D::Ref<Niking2D::Shader> m_FlatColorShader;
+	Niking2D::Ref<Niking2D::VertexArray> m_SquareVA;
 
 	Niking2D::OrthograhicCamera m_Camera;
 	glm::vec3 m_CameraPosition;
