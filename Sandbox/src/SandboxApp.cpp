@@ -25,7 +25,7 @@ public:
 		{
 			Niking2D::BufferLayout layout = {
 				{Niking2D::ShaderDataType::Float3, "a_Position"},
-				{Niking2D::ShaderDataType::Float4, "a_Color"},
+				{Niking2D::ShaderDataType::Float4, "a_TexCoord"},
 				//{ShaderDataType::Float3, "a_Normal"}
 			};
 			m_VertexBuffer->SetLayout(layout);
@@ -42,11 +42,11 @@ public:
 		m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 		m_SquareVA.reset(Niking2D::VertexArray::Create());
-		float squareVertices[4 * 3] = {
-			-0.5f, -0.5f, 0.0f,
-			 0.5f, -0.5f, 0.0f,
-			 0.5f, 0.5f,  0.0f,
-			-0.5f, 0.5f,  0.0f,
+		float squareVertices[4 * 5] = {
+			-0.5f, -0.5f, 0.0f,	0.0f, 0.0f,
+			 0.5f, -0.5f, 0.0f,	1.0f, 0.0f,
+			 0.5f, 0.5f,  0.0f,	1.0f, 1.0f,
+			-0.5f, 0.5f,  0.0f,	0.0f, 1.0f
 		};
 
 		Niking2D::Ref<Niking2D::VertexBuffer> squareVB;
@@ -55,6 +55,7 @@ public:
 		{
 			Niking2D::BufferLayout layout = {
 				{Niking2D::ShaderDataType::Float3, "a_Position"},
+				{Niking2D::ShaderDataType::Float2, "a_TexCoord"},
 			};
 			squareVB->SetLayout(layout);
 		}
@@ -138,8 +139,49 @@ public:
 			}
 		)";
 
-		m_Shader.reset(Niking2D::Shader::Create(vertexSrc, fragSrc));
-		m_FlatColorShader.reset(Niking2D::Shader::Create(flatShaderVertexSrc, flatShaderfragSrc));
+
+		std::string textureShaderVertexSrc = R"(
+			#version 330 core
+
+			layout(location = 0 ) in vec3 a_Position;
+			layout(location = 1 ) in vec2 a_TexCoord;
+			
+			uniform mat4 u_ViewProjection;
+			uniform mat4 u_Transform;
+
+			out vec2 v_TexCoord;
+
+			void main(){
+				v_TexCoord = a_TexCoord;
+				gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+			}
+		)";
+
+		std::string textureShaderfragSrc = R"(
+			#version 330 core
+			out vec4 color;
+
+			in vec2 v_TexCoord;
+			uniform sampler2D u_Texture;
+
+			void main(){
+				color = texture(u_Texture, v_TexCoord);
+			}
+		)";
+
+		//m_FlatColorShader.reset(Niking2D::Shader::Create(flatShaderVertexSrc, flatShaderfragSrc));
+
+
+		m_TextureShader.reset(Niking2D::Shader::Create(textureShaderVertexSrc, textureShaderfragSrc));		
+
+
+		//m_Texture = Niking2D::Texture2D::Create(std::string("assets/textures/tornado.png"));
+		m_Texture = Niking2D::Texture2D::Create(std::string("assets/textures/Checkerboard.png"));
+		//m_Texture = Niking2D::Texture2D::Create("assets/textures/test.png");
+	
+		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_TextureShader)->Bind();
+		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+
 	}
 
 	void OnUpdate(Niking2D::Timestep ts) override {
@@ -204,24 +246,26 @@ public:
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
 		
-		m_FlatColorShader->Bind();
 		//std::dynamic_pointer_cast<OpenGLShader>(m_FlatColorShader)->
 		//std::dynamic_pointer_cast<OpenGLS
-		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
+		//m_FlatColorShader->Bind();
+		//std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat3("u_Color", m_SquareColor);
 
-		for(int y = 0; y < 5; y++)
-			for (int i = 0; i < 5; i++) {
-				glm::vec3 pos(i * 0.11f, y * 0.11f, 0.0f);
+		//for(int y = 20; y < 20; y++)
+		//	for (int i = 20; i < 20; i++) {
+		//		glm::vec3 pos(i * 0.11f, y * 0.11f, 0.0f);
 
-				
+		//		
 
-				glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) *  glm::translate(glm::mat4(1.0f), m_SquarePosition) * scale;
-				Niking2D::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
+		//		glm::mat4 transform = glm::translate(glm::mat4(1.0f), pos) *  glm::translate(glm::mat4(1.0f), m_SquarePosition) * scale;
+		//		Niking2D::Renderer::Submit(m_FlatColorShader, m_SquareVA, transform);
 
-			}
+		//	}
 
 
-		//Niking2D::Renderer::Submit(m_Shader, m_VertexArray);
+		m_Texture->Bind();
+		//m_TextureShader->Bind();
+		Niking2D::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		Niking2D::Renderer::EndScene();
 
@@ -279,8 +323,10 @@ private:
 
 
 	Niking2D::Ref<Niking2D::VertexArray> m_VertexArray;
-	Niking2D::Ref<Niking2D::Shader> m_FlatColorShader;
+	Niking2D::Ref<Niking2D::Shader> m_FlatColorShader, m_TextureShader;
 	Niking2D::Ref<Niking2D::VertexArray> m_SquareVA;
+
+	Niking2D::Ref<Niking2D::Texture2D> m_Texture;
 
 	Niking2D::OrthograhicCamera m_Camera;
 	glm::vec3 m_CameraPosition;

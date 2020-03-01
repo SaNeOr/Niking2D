@@ -21,6 +21,7 @@
 
 #include "Niking2D/Renderer/Buffer.h"
 #include "Niking2D/Renderer/Shader.h"
+#include "Niking2D/Renderer/Texture.h"
 #include "Niking2D/Renderer/VertexArray.h"
 
 #include "Niking2D/Renderer/OrthographicCamera.h"
