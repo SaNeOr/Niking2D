@@ -2,9 +2,11 @@
 #include <unordered_map>
 #include "Niking2D/Renderer/Shader.h"
 
+typedef unsigned int GLenum;
 namespace Niking2D {
 	class OpenGLShader:public Shader {
 	public:
+		OpenGLShader(const std::string& filepath);
 		OpenGLShader(const std::string& vertexSrc, const std::string& fragmentSrc);
 		virtual ~OpenGLShader();
 
@@ -25,7 +27,12 @@ namespace Niking2D {
 
 	private:
 		int GetUniformLocation(const std::string& name);
+
+		std::string ReadFile(const std::string& filepath);
+		std::unordered_map<GLenum, std::string> PreProcess(const std::string& source);
+		void Compile(const std::unordered_map<GLenum, std::string> shaderSources);
 	private:
+
 		unsigned int m_RendererID;
 		std::unordered_map<std::string, int> m_UniformLocationCache;
 
