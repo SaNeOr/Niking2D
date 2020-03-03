@@ -25,8 +25,17 @@ namespace Niking2D {
 		auto shaderSource = PreProcess(source);
 		Compile(shaderSource);
 
+		//	assets/shaders/texture.shader	==extract=> texture as m_Name;
+		size_t lastSlash = filepath.find_last_of("/\\");
+		lastSlash = lastSlash == std::string::npos ? 0 : lastSlash + 1;
+		size_t lastDot = filepath.rfind(".");
+		size_t count = lastDot == std::string::npos ? filepath.size() - lastSlash: lastDot - lastSlash;
+
+		m_Name = filepath.substr(lastSlash, count);
+
 	}
-	Niking2D::OpenGLShader::OpenGLShader(const std::string & vertexSrc, const std::string & fragmentSrc)
+	Niking2D::OpenGLShader::OpenGLShader(const std::string& name, const std::string & vertexSrc, const std::string & fragmentSrc)
+		:m_Name(name)
 	{
 		std::unordered_map<GLenum, std::string> sources;
 		sources[GL_VERTEX_SHADER] = vertexSrc;
@@ -113,7 +122,7 @@ namespace Niking2D {
 	{
 
 		std::string result;
-		std::ifstream in(filepath, std::ios::in, std::ios::binary);
+		std::ifstream in(filepath, std::ios::in | std::ios::binary);
 
 		if (in) {
 			in.seekg(0, std::ios::end);
@@ -173,7 +182,11 @@ namespace Niking2D {
 		//std::string fragmentSource = shaderSources[GL_FRAGMENT_SHADER];// Get source code for fragment shader.
 
 		GLuint program = glCreateProgram();
-		std::vector<GLuint> glShaderIDs(shaderSources.size());
+		N2_CORE_ASSERT(shaderSources.size() <= 2, "We only support 2 shaders for now!");
+		std::array<GLuint, 2> glShaderIDs; 
+		int glShaderIdIndex = 0;
+		//glShaderIDs.reserve(shaderSources.size());
+
 
 		for (auto& kv : shaderSources) {
 			GLenum type = kv.first;
@@ -210,7 +223,7 @@ namespace Niking2D {
 			}
 
 			glAttachShader(program, shader);
-			glShaderIDs.push_back(shader);
+			glShaderIDs[glShaderIdIndex++] = shader;
 
 		}
 

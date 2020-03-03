@@ -145,9 +145,9 @@ public:
 
 
 
-
-		m_TextureShader.reset(Niking2D::Shader::Create("assets/shaders/Texture.shader"));		
-
+		m_Shader = Niking2D::Shader::Create("VertexPosColorTriangle", vertexSrc, fragSrc);
+		//m_TextureShader = Niking2D::Shader::Create("assets/shaders/Texture.shader");
+		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.shader");
 
 		//Niking2D::Shader::Create("filePath");
 
@@ -155,8 +155,8 @@ public:
 		m_Texture = Niking2D::Texture2D::Create(std::string("assets/textures/Checkerboard.png"));
 		m_testTexture = Niking2D::Texture2D::Create("assets/textures/test.png");
 	
-		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_TextureShader)->Bind();
-		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_TextureShader)->UploadUniformInt("u_Texture", 0);
+		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(textureShader)->Bind();
+		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
 	}
 
@@ -238,14 +238,15 @@ public:
 
 		//	}
 
+		auto textureShader = m_ShaderLibrary.Get("Texture");
 
 		m_Texture->Bind();
 		//m_TextureShader->Bind();
-		Niking2D::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));	
+		Niking2D::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 		
 		m_testTexture->Bind();
-		Niking2D::Renderer::Submit(m_TextureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+		Niking2D::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
 		Niking2D::Renderer::EndScene();
 
@@ -298,6 +299,7 @@ public:
 	}
 
 private:
+	Niking2D::ShaderLibrary m_ShaderLibrary;
 	Niking2D::Ref<Niking2D::Shader> m_Shader;
 	
 
