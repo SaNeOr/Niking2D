@@ -13,7 +13,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
-#include "Niking2D/Log.h"
+#include "Niking2D/Core/Log.h"
 
 #ifdef N2_PLATFORM_WINDOWS
 	#include <Windows.h>

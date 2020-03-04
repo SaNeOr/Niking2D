@@ -2,10 +2,11 @@
 #include "WindowsInput.h"
 
 
-#include "Niking2D/Application.h"
+#include "Niking2D/Core/Application.h"
 #include <GLFW/glfw3.h>
 
 namespace Niking2D {
+
 
 	Input* Input::s_Instance = new WindowsInput();
 

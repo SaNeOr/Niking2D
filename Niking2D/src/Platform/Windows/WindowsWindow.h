@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Niking2D/Window.h"
+#include "Niking2D/Core/Window.h"
 
 #include <GLFW/glfw3.h>
 

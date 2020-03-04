@@ -2,7 +2,7 @@
 
 #include "n2pch.h"
 
-#include "Niking2D/Core.h"
+#include "Niking2D/Core/Core.h"
 #include "Niking2D/Events/Event.h"
 
 

@@ -4,7 +4,7 @@
 #include "imgui.h"
 #include <dock/imgui_impl_glfw.h>
 #include <dock/imgui_impl_opengl3.h>
-#include "Niking2D/Application.h"
+#include "Niking2D/Core/Application.h"
 
 
 

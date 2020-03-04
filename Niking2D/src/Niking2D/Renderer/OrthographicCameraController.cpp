@@ -1,7 +1,7 @@
 #include "n2pch.h"
 #include "OrthographicCameraController.h"
-#include "Niking2D/Input.h";
-#include "Niking2D/KeyCodes.h"
+#include "Niking2D/Core/Input.h"
+#include "Niking2D/Core/KeyCodes.h"
 
 Niking2D::OrthograhicCameraController::OrthograhicCameraController(float aspectRatio, bool rotation)
 	:m_AspectRation(aspectRatio),

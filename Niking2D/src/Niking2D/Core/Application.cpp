@@ -1,7 +1,8 @@
 #include "n2pch.h"
 #include "Application.h"
 
-#include "Events/KeyEvent.h"
+
+#include "Niking2D/Events/KeyEvent.h"
 #include "Log.h"
 #include <glad/glad.h>
 #include "Niking2D/Renderer/Renderer.h"

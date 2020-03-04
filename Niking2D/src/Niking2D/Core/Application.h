@@ -1,12 +1,12 @@
 #pragma once
 
 #include "Core.h"
-#include "Events/Event.h"
-#include "Niking2D/Window.h"
-#include "Niking2D/LayerStack.h"
+#include "Niking2D/Events/Event.h"
+#include "Niking2D/Core/Window.h"
+#include "Niking2D/Core/LayerStack.h"
 
-#include "Events/ApplicationEvent.h"
-#include "Niking2D/Input.h"
+#include "Niking2D/Events/ApplicationEvent.h"
+#include "Niking2D/Core/Input.h"
 
 #include "Niking2D/ImGui/ImGuiLayer.h"
 #include "Niking2D/Core/Timestep.h"

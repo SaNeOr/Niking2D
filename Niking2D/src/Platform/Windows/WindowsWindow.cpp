@@ -1,7 +1,7 @@
 #include "n2pch.h"
 #include "WindowsWindow.h"
-#include "Niking2D/Log.h"
-#include "Niking2D/Core.h"
+#include "Niking2D/Core/Log.h"
+#include "Niking2D/Core/Core.h"
 
 
 #include "Niking2D/Events/ApplicationEvent.h"

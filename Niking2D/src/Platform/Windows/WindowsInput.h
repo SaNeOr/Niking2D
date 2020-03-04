@@ -1,6 +1,6 @@
 #pragma once
 
-#include"Niking2D/Input.h"
+#include"Niking2D/Core/Input.h"
 
 namespace Niking2D {
 	class WindowsInput :public Input {

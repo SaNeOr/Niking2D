@@ -1,7 +1,7 @@
 #pragma once
 
 #include <string>
-#include "Niking2D/Core.h"
+#include "Niking2D/Core/Core.h"
 
 namespace Niking2D {
 	class Texture {
