@@ -9,7 +9,7 @@
 class ExampleLayer :public Niking2D::Layer {
 public:
 	ExampleLayer()
-		:Layer("Example"), m_Camera(-1.6f, 1.6f, -0.9f, 0.9f), m_CameraPosition(0.0f),
+		:Layer("Example"), m_Camera(1.6f / 0.9f, true),
 		m_SquarePosition(0.0f)
 	{
 		m_VertexArray.reset(Niking2D::VertexArray::Create());
@@ -145,7 +145,7 @@ public:
 
 
 
-		m_Shader = Niking2D::Shader::Create("VertexPosColorTriangle", vertexSrc, fragSrc);
+		//m_Shader = Niking2D::Shader::Create("VertexPosColorTriangle", vertexSrc, fragSrc);
 		//m_TextureShader = Niking2D::Shader::Create("assets/shaders/Texture.shader");
 		auto textureShader = m_ShaderLibrary.Load("assets/shaders/Texture.shader");
 
@@ -158,6 +158,8 @@ public:
 		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(textureShader)->Bind();
 		std::dynamic_pointer_cast<Niking2D::OpenGLShader>(textureShader)->UploadUniformInt("u_Texture", 0);
 
+		
+		
 	}
 
 	void OnUpdate(Niking2D::Timestep ts) override {
@@ -168,31 +170,9 @@ public:
 
 		//N2_CORE_TRACE("Delta time :{0}s ({1}ms)", ts.GetSeconds(), ts.GetMillseconds());
 
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_LEFT)) {
-			m_CameraPosition.x -= m_CameraMoveSpeed * ts;
-
-		}
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_RIGHT)) {
-			m_CameraPosition.x += m_CameraMoveSpeed * ts;
-
-		}
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_DOWN)) {
-			m_CameraPosition.y -= m_CameraMoveSpeed * ts;
-
-		}
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_UP)) {
-			m_CameraPosition.y += m_CameraMoveSpeed * ts;
-		}
-
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_A)) {
-			m_CameraRotation += m_CameraRotationSpeed * ts;
-		}
-		if (Niking2D::Input::IsKeyPressed(N2_KEY_D)) {
-			m_CameraRotation -= m_CameraRotationSpeed * ts;
-		}
 
 
-
+		m_Camera.OnUpdate(ts);
 
 		if (Niking2D::Input::IsKeyPressed(N2_KEY_J)) {
 			m_SquarePosition.x -= m_SquareMoveSpeed * ts;
@@ -214,10 +194,9 @@ public:
 		Niking2D::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 		Niking2D::RenderCommand::Clear();
 
-		m_Camera.SetPosition(m_CameraPosition);
-		m_Camera.SetRotation(m_CameraRotation);
 
-		Niking2D::Renderer::BeginScene(m_Camera);
+
+		Niking2D::Renderer::BeginScene(m_Camera.GetCamera());
 
 		glm::mat4 scale = glm::scale(glm::mat4(1.0f), glm::vec3(0.1f));
 
@@ -241,7 +220,6 @@ public:
 		auto textureShader = m_ShaderLibrary.Get("Texture");
 
 		m_Texture->Bind();
-		//m_TextureShader->Bind();
 		Niking2D::Renderer::Submit(textureShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 		
 		
@@ -268,6 +246,7 @@ public:
 		//	N2_CORE_TRACE("{0}", (char)e.GetKeyCode());
 		//}
 
+		m_Camera.OnEvent(event);
 
 		Niking2D::EventDispatcher dispatcher(event);
 		dispatcher.Dispatch<Niking2D::KeyPressedEvent>(N2_BIND_EVENT_FN(ExampleLayer::OnKeyPressedEvent));
@@ -310,13 +289,14 @@ private:
 
 	Niking2D::Ref<Niking2D::Texture2D> m_Texture, m_testTexture;
 
-	Niking2D::OrthograhicCamera m_Camera;
-	glm::vec3 m_CameraPosition;
+	//Niking2D::OrthograhicCamera m_Camera;
+	Niking2D::OrthograhicCameraController m_Camera;
 
-	float m_CameraRotation = 0.0f;
 
-	float m_CameraMoveSpeed = 5.0f;
-	float m_CameraRotationSpeed = 100.0f;
+	//glm::vec3 m_CameraPosition;
+	//float m_CameraRotation = 0.0f;
+	//float m_CameraMoveSpeed = 5.0f;
+	//float m_CameraRotationSpeed = 100.0f;
 
 
 	glm::vec3 m_SquarePosition;
