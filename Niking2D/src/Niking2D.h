@@ -30,5 +30,4 @@
 
 
 // ----Entry Point-------------------
-#include "Niking2D/Core/EntryPoint.h"
 // ----------------------------------
