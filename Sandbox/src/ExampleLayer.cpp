@@ -18,7 +18,7 @@ ExampleLayer::ExampleLayer()
 		  0.0f, 0.5f, 0.0f, 1.0f, 1.0f, 1.0f, 1.0f,
 	};
 	Niking2D::Ref <Niking2D::VertexBuffer> m_VertexBuffer;
-	m_VertexBuffer.reset(Niking2D::VertexBuffer::Create(vertices, sizeof(vertices)));
+	m_VertexBuffer = Niking2D::VertexBuffer::Create(vertices, sizeof(vertices));
 
 	{
 		Niking2D::BufferLayout layout = {
@@ -36,7 +36,7 @@ ExampleLayer::ExampleLayer()
 		0,1,2
 	};
 	Niking2D::Ref<Niking2D::IndexBuffer> m_IndexBuffer;
-	m_IndexBuffer.reset(Niking2D::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int)));
+	m_IndexBuffer =  Niking2D::IndexBuffer::Create(indices, sizeof(indices) / sizeof(unsigned int));
 	m_VertexArray->SetIndexBuffer(m_IndexBuffer);
 
 	m_SquareVA = Niking2D::VertexArray::Create();
@@ -48,7 +48,7 @@ ExampleLayer::ExampleLayer()
 	};
 
 	Niking2D::Ref<Niking2D::VertexBuffer> squareVB;
-	squareVB.reset(Niking2D::VertexBuffer::Create(squareVertices, sizeof(squareVertices)));
+	squareVB = Niking2D::VertexBuffer::Create(squareVertices, sizeof(squareVertices));
 
 	{
 		Niking2D::BufferLayout layout = {
@@ -64,7 +64,7 @@ ExampleLayer::ExampleLayer()
 	};
 	Niking2D::Ref<Niking2D::IndexBuffer> squareIB;
 
-	squareIB.reset(Niking2D::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int)));
+	squareIB = Niking2D::IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int));
 
 	m_SquareVA->SetIndexBuffer(squareIB);
 

@@ -6,12 +6,12 @@
 
 namespace Niking2D {
 
-	VertexBuffer * Niking2D::VertexBuffer::Create(float * vertices, unsigned int size)
+	Ref<VertexBuffer> Niking2D::VertexBuffer::Create(float * vertices, unsigned int size)
 	{
 		switch (Renderer::GetAPI()){
 		
 			case RendererAPI::API::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-			case RendererAPI::API::OpenGL:		return new OpenGLVertexBuffer(vertices, size);
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLVertexBuffer>(vertices, size);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");
@@ -19,12 +19,12 @@ namespace Niking2D {
 
 	}
 
-	IndexBuffer * Niking2D::IndexBuffer::Create(unsigned int* indices, unsigned int size)
+	Ref<IndexBuffer> Niking2D::IndexBuffer::Create(unsigned int* indices, unsigned int size)
 	{
 		switch (Renderer::GetAPI()) {
 
 		case RendererAPI::API::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-		case RendererAPI::API::OpenGL:		return new OpenGLIndexBuffer(indices, size);
+		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLIndexBuffer>(indices, size);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");
