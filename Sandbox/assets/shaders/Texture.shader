@@ -1,3 +1,5 @@
+//	Basic Texture Shader
+
 #type vertex
 #version 330 core
 
@@ -19,10 +21,10 @@ void main(){
 out vec4 color;
 
 in vec2 v_TexCoord;
+
 uniform sampler2D u_Texture;
 uniform vec4 u_Color;
 
 void main(){
-	//color = u_Color * texture(u_Texture, v_TexCoord);
-	color = u_Color;
+	color = texture(u_Texture, v_TexCoord) *   u_Color;
 }

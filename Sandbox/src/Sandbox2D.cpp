@@ -46,6 +46,8 @@ void Sandbox2D::OnAttach()
 
 	m_FlatColorShader = Niking2D::Shader::Create("assets/shaders/FlatColor.shader");
 
+	m_Texture = Niking2D::Texture2D::Create("assets/textures/test.png");
+
 
 }
 
@@ -62,7 +64,8 @@ void Sandbox2D::OnUpdate(Niking2D::Timestep ts)
 
 	Niking2D::Renderer2D::BeginScene(m_CameraController.GetCamera());
 
-	Niking2D::Renderer2D::DrawQuad({ 0.0,0.0f }, { 1.0f,1.0f }, { 0.8f,0.2f,0.3f,0.9f });
+	Niking2D::Renderer2D::DrawQuad({ 0.0,0.0f }, { 1.0f,1.0f }, { 0.8f,0.2f,0.3f,1.0f });
+	Niking2D::Renderer2D::DrawQuad({ 0.5,0.5f, -0.1f }, { 1.0f,1.0f }, m_Texture);
 	Niking2D::Renderer2D::EndScene();
 
 	//Niking2D::Renderer::BeginScene(m_CameraController.GetCamera());

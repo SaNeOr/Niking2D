@@ -37,6 +37,7 @@ namespace Niking2D {
 			{ShaderDataType::Float2, "a_TexCoord"},
 		});
 		s_Data->QuadVertexArray->AddVertexBuffer(squareVB);
+
 		unsigned int squareIndices[6] = { 0,1,2,2,3,0 };
 		Ref<IndexBuffer> squareIB = IndexBuffer::Create(squareIndices, sizeof(squareIndices) / sizeof(unsigned int));
 		s_Data->QuadVertexArray->SetIndexBuffer(squareIB);
@@ -82,8 +83,6 @@ namespace Niking2D {
 
 		s_Data->QuadVertexArray->Bind();
 		RenderCommand::DrawIndexed(s_Data->QuadVertexArray);
-
-		
 	}
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const Ref<Texture2D>& texture)

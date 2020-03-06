@@ -150,7 +150,7 @@ ExampleLayer::ExampleLayer()
 	//Niking2D::Shader::Create("filePath");
 
 	//m_Texture = Niking2D::Texture2D::Create(std::string("assets/textures/tornado.png"));
-	m_Texture = Niking2D::Texture2D::Create(std::string("assets/textures/Checkerboard.png"));
+	m_Texture = Niking2D::Texture2D::Create("assets/textures/Checkerboard.png");
 	m_testTexture = Niking2D::Texture2D::Create("assets/textures/test.png");
 
 	std::dynamic_pointer_cast<Niking2D::OpenGLShader>(textureShader)->Bind();

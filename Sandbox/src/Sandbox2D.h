@@ -19,6 +19,9 @@ private:
 	//	Temp
 	Niking2D::Ref<Niking2D::VertexArray> m_SquareVA;
 	Niking2D::Ref<Niking2D::Shader> m_FlatColorShader;
+	Niking2D::Ref<Niking2D::Texture2D> m_Texture;
+	
+
 
 	glm::vec4 m_SquareColor = { 0.2f, 0.3f, 0.8f, 1.0f };
 
