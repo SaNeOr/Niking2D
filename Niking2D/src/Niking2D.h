@@ -26,6 +26,8 @@
 
 #include "Niking2D/Renderer/OrthographicCamera.h"
 #include "Niking2D/Renderer/OrthographicCameraController.h"
+
+#include "Niking2D/Renderer/Renderer2D.h"
 // ----------------------------------
 
 

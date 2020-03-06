@@ -8,7 +8,7 @@
 #include "Platform/OpenGL/OpenGLShader.h"
 
 Sandbox2D::Sandbox2D()
-	:Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f)
+	:Layer("Sandbox2D"), m_CameraController(1280.0f / 720.0f, true)
 {
 	
 }
@@ -59,14 +59,20 @@ void Sandbox2D::OnUpdate(Niking2D::Timestep ts)
 
 	Niking2D::RenderCommand::SetClearColor({ 0.1f, 0.1f, 0.1f, 1 });
 	Niking2D::RenderCommand::Clear();
-	Niking2D::Renderer::BeginScene(m_CameraController.GetCamera());
-	m_FlatColorShader->Bind();
-	std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
+
+	Niking2D::Renderer2D::BeginScene(m_CameraController.GetCamera());
+
+	Niking2D::Renderer2D::DrawQuad({ 0.0,0.0f }, { 1.0f,1.0f }, { 0.8f,0.2f,0.3f,0.9f });
+	Niking2D::Renderer2D::EndScene();
+
+	//Niking2D::Renderer::BeginScene(m_CameraController.GetCamera());
+	//m_FlatColorShader->Bind();
+	//std::dynamic_pointer_cast<Niking2D::OpenGLShader>(m_FlatColorShader)->UploadUniformFloat4("u_Color", m_SquareColor);
 
 
-	Niking2D::Renderer::Submit(m_FlatColorShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
+	//Niking2D::Renderer::Submit(m_FlatColorShader, m_SquareVA, glm::scale(glm::mat4(1.0f), glm::vec3(1.5f)));
 
-	Niking2D::Renderer::EndScene();
+	//Niking2D::Renderer::EndScene();
 }
 
 void Sandbox2D::OnImGuiRender()
@@ -79,4 +85,5 @@ void Sandbox2D::OnImGuiRender()
 
 void Sandbox2D::OnEvent(Niking2D::Event& event)
 {
+	m_CameraController.OnEvent(event);
 }

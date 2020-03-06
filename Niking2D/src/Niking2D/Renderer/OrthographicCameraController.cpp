@@ -3,12 +3,12 @@
 #include "Niking2D/Core/Input.h"
 #include "Niking2D/Core/KeyCodes.h"
 
-Niking2D::OrthograhicCameraController::OrthograhicCameraController(float aspectRatio, bool rotation)
+Niking2D::OrthographicCameraController::OrthographicCameraController(float aspectRatio, bool rotation)
 	:m_AspectRation(aspectRatio),
 	m_Camera(-m_AspectRation * m_ZoomLevel, m_AspectRation * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel), 
 	m_Rotation (rotation){}
 
-void Niking2D::OrthograhicCameraController::OnUpdate(Timestep ts)
+void Niking2D::OrthographicCameraController::OnUpdate(Timestep ts)
 {
 
 	//	Forward Move
@@ -52,15 +52,15 @@ void Niking2D::OrthograhicCameraController::OnUpdate(Timestep ts)
 
 }
 
-void Niking2D::OrthograhicCameraController::OnEvent(Event & e)
+void Niking2D::OrthographicCameraController::OnEvent(Event & e)
 {
 	EventDispatcher dispatcher(e);
-	dispatcher.Dispatch<MouseScrolledEvent>(N2_BIND_EVENT_FN(OrthograhicCameraController::OnMouseScrolled));
-	dispatcher.Dispatch<WindowResizeEvent>(N2_BIND_EVENT_FN(OrthograhicCameraController::OnWindowResized));
+	dispatcher.Dispatch<MouseScrolledEvent>(N2_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
+	dispatcher.Dispatch<WindowResizeEvent>(N2_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
 
 }
 
-bool Niking2D::OrthograhicCameraController::OnMouseScrolled(MouseScrolledEvent & e)
+bool Niking2D::OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent & e)
 {
 	m_ZoomLevel -= e.GetYOffset() * .25f;
 	m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
@@ -69,7 +69,7 @@ bool Niking2D::OrthograhicCameraController::OnMouseScrolled(MouseScrolledEvent &
 	return false;
 }
 
-bool Niking2D::OrthograhicCameraController::OnWindowResized(WindowResizeEvent & e)
+bool Niking2D::OrthographicCameraController::OnWindowResized(WindowResizeEvent & e)
 {
 	m_AspectRation = (float)e.GetWidth() / (float)e.GetHeight();
 	m_Camera.SetProjection(-m_AspectRation * m_ZoomLevel, m_AspectRation * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);

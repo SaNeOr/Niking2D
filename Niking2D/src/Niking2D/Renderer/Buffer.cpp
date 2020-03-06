@@ -19,12 +19,11 @@ namespace Niking2D {
 
 	}
 
-	Ref<IndexBuffer> Niking2D::IndexBuffer::Create(unsigned int* indices, unsigned int size)
+	Ref<IndexBuffer> Niking2D::IndexBuffer::Create(unsigned int* indices, unsigned int count)
 	{
 		switch (Renderer::GetAPI()) {
-
-		case RendererAPI::API::None:			{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-		case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLIndexBuffer>(indices, size);
+			case RendererAPI::API::None:		{N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
+			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLIndexBuffer>(indices, count);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");

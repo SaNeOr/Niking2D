@@ -60,6 +60,21 @@ namespace Niking2D {
 		glUseProgram(0);
 	}
 
+	void OpenGLShader::SetInt(const std::string& name, int value)
+	{
+		UploadUniformInt(name, value);
+	}
+
+	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& martix)
+	{
+		UploadUniformMat4(name, martix);
+	}
+
+	void OpenGLShader::SeFloat4(const std::string& name, const glm::vec4& values)
+	{
+		UploadUniformFloat4(name, values);
+	}
+
 	void OpenGLShader::UploadUniformInt(const std::string & name, const int values)
 	{
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());

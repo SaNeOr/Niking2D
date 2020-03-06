@@ -17,6 +17,10 @@ namespace Niking2D {
 		virtual const std::string& GetName() const override { return m_Name; }
 
 
+		virtual void SetInt(const std::string& name, int value) override;
+		virtual void SetMat4(const std::string& name, const glm::mat4& martix) override;
+		virtual void SeFloat4(const std::string& name, const glm::vec4& values) override;
+
 		void UploadUniformInt(const std::string& name, const int values);
 
 		void UploadUniformFloat(const std::string& name, const float values);

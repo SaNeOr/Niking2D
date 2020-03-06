@@ -53,7 +53,7 @@ private:
 	Niking2D::Ref<Niking2D::Texture2D> m_Texture, m_testTexture;
 
 	//Niking2D::OrthograhicCamera m_Camera;
-	Niking2D::OrthograhicCameraController m_Camera;
+	Niking2D::OrthographicCameraController m_Camera;
 
 
 	//glm::vec3 m_CameraPosition;

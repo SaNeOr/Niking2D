@@ -14,7 +14,7 @@ public:
 	virtual void OnEvent(Niking2D::Event& event) override;
 
 private:
-	Niking2D::OrthograhicCameraController m_CameraController;
+	Niking2D::OrthographicCameraController m_CameraController;
 
 	//	Temp
 	Niking2D::Ref<Niking2D::VertexArray> m_SquareVA;

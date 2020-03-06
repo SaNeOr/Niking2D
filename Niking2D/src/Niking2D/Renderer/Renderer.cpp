@@ -4,6 +4,7 @@
 
 #include "Platform/OpenGL/OpenGLShader.h"
 
+#include "Niking2D/Renderer/Renderer2D.h"
 namespace Niking2D {
 
 	Renderer::SceneData* Renderer::m_SceneData = new Renderer::SceneData;
@@ -11,6 +12,7 @@ namespace Niking2D {
 	void Renderer::Init()
 	{
 		RenderCommand::Init();
+		Renderer2D::Init();
 	}
 
 	void Renderer::BeginScene(OrthograhicCamera& camera)

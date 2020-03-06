@@ -5,10 +5,10 @@
 #include "Niking2D/Events/MouseEvent.h"
 #include "Niking2D/Events/ApplicationEvent.h"
 namespace Niking2D {
-	class OrthograhicCameraController {
+	class OrthographicCameraController {
 
 	public:
-		OrthograhicCameraController(float aspectRatio, bool rotation = false);
+		OrthographicCameraController(float aspectRatio, bool rotation = false);
 		
 		void OnUpdate(Timestep ts);
 

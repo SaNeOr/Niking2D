@@ -12,11 +12,13 @@ namespace Niking2D {
 	public:
 		 
 		OpenGLTexture2D(const std::string& path);
+		OpenGLTexture2D(unsigned int width, unsigned int height);
 		virtual ~OpenGLTexture2D();
 
 		virtual void Bind(unsigned int slot = 0) const override;
 		virtual void Unbind() const override;
 
+		virtual void SetData(void* data, unsigned int size) override;
 
 		inline int GetWidth() const { return m_Width; }
 		inline int GetHeight() const { return m_Height; }
@@ -27,5 +29,6 @@ namespace Niking2D {
 		std::string m_FilePath;
 		unsigned char* m_LocalBuffer;
 		int m_Width, m_Height, channels;
+		GLenum m_InternalFormat, m_DataFormat;
 	};
 }
