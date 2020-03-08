@@ -11,6 +11,8 @@ namespace Niking2D {
 
 	void Renderer::Init()
 	{
+		//N2_PROFILE_FUNCTION();
+
 		RenderCommand::Init();
 		Renderer2D::Init();
 	}

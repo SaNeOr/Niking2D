@@ -9,7 +9,7 @@ namespace Niking2D {
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None: {N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLVertexArray>();
+			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLVertexArray>();
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");

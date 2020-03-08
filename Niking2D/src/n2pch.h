@@ -15,6 +15,8 @@
 
 #include "Niking2D/Core/Log.h"
 
+#include "Niking2D/Debug/Instrumentor.h"
+
 #ifdef N2_PLATFORM_WINDOWS
 	#include <Windows.h>
 #endif

@@ -7,6 +7,7 @@ namespace Niking2D {
 
 	public:
 		inline static void Init() {
+
 			s_RendererAPI->Init();
 		}
 

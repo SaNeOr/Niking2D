@@ -13,6 +13,9 @@ namespace Niking2D {
 	}
 	void OpenGLContext::Init()
 	{
+		//N2_PROFILE_FUNCTION();
+
+
 		glfwMakeContextCurrent(m_WindowHandle);
 		int status = gladLoadGLLoader((GLADloadproc)glfwGetProcAddress);
 
@@ -29,7 +32,7 @@ namespace Niking2D {
 	}
 	void OpenGLContext::SwapBuffers()
 	{	
-		
+		//N2_PROFILE_FUNCTION();
 
 
 		glfwSwapBuffers(m_WindowHandle);

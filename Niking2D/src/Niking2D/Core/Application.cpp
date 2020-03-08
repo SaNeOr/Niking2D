@@ -18,6 +18,9 @@ namespace Niking2D {
 
 	Application::Application()
 	{
+
+		//N2_PROFILE_FUNCTION();
+
 		N2_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
 

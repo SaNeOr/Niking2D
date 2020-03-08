@@ -24,6 +24,8 @@ namespace Niking2D {
 	}
 
 	WindowsWindow::WindowsWindow(const WindowProps& props) {
+		//N2_PROFILE_FUNCTION();
+
 		Init(props);
 	}
 
@@ -31,11 +33,16 @@ namespace Niking2D {
 
 	Niking2D::WindowsWindow::~WindowsWindow()
 	{
+		//N2_PROFILE_FUNCTION();
+
+
 		ShutDown();
 	}
 
 	void WindowsWindow::OnUpdate()
 	{
+		//N2_PROFILE_FUNCTION();
+
 		glfwPollEvents();
 
 		m_Context->SwapBuffers();
@@ -44,6 +51,9 @@ namespace Niking2D {
 
 	void WindowsWindow::SetVSync(bool enable)
 	{
+		//N2_PROFILE_FUNCTION();
+
+
 		if (enable) {
 			glfwSwapInterval(1);
 		}
@@ -61,6 +71,9 @@ namespace Niking2D {
 
 	void WindowsWindow::Init(const WindowProps & props)
 	{
+		//N2_PROFILE_FUNCTION();
+
+
 		m_Data.Titile = props.Title;
 		m_Data.Width = props.Width;
 		m_Data.Height = props.Height;
@@ -180,6 +193,8 @@ namespace Niking2D {
 
 	void WindowsWindow::ShutDown()
 	{
+		//N2_PROFILE_FUNCTION();
+
 		glfwDestroyWindow(m_Window);
 	}
 

@@ -8,7 +8,7 @@ namespace Niking2D {
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None: {N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(filepath);
+			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLShader>(filepath);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");
@@ -19,7 +19,7 @@ namespace Niking2D {
 	{
 		switch (Renderer::GetAPI()) {
 			case RendererAPI::API::None: {N2_CORE_ASSERT(false, "RendererAPI::None is currently is not supported!"); return nullptr; }
-			case RendererAPI::API::OpenGL:		return std::make_shared<OpenGLShader>(name, vertexSrc, fragmentSrc);
+			case RendererAPI::API::OpenGL:		return CreateRef<OpenGLShader>(name, vertexSrc, fragmentSrc);
 		}
 
 		N2_CORE_ASSERT(false, "Unkonw RendererAPI!");
