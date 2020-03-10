@@ -19,7 +19,7 @@ namespace Niking2D {
 	Application::Application()
 	{
 
-		//N2_PROFILE_FUNCTION();
+		N2_PROFILE_FUNCTION();
 
 		N2_CORE_ASSERT(!s_Instance, "Application already exists!");
 		s_Instance = this;
@@ -38,10 +38,13 @@ namespace Niking2D {
 
 	Application::~Application()
 	{
+		N2_PROFILE_FUNCTION();
 
+		
 	}
 	void Application::Run()
 	{
+		N2_PROFILE_FUNCTION();
 
 		while (m_Running) {
 
@@ -78,6 +81,7 @@ namespace Niking2D {
 	}
 	void Application::OnEvent(Event & e)
 	{
+		N2_PROFILE_FUNCTION();
 
 		EventDispatcher dispatcher(e);
 		dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
@@ -100,12 +104,16 @@ namespace Niking2D {
 
 	void Application::PushLayer(Layer* layer)
 	{
+		N2_PROFILE_FUNCTION();
+
 		m_LayerStack.PushLayer(layer);
 		layer->OnAttach();
 	}
 
 	void Application::PushOverLayer(Layer* layer)
 	{
+		N2_PROFILE_FUNCTION();
+
 		m_LayerStack.PushOverLayer(layer);
 		layer->OnAttach();
 	}

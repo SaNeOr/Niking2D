@@ -19,12 +19,13 @@ namespace Niking2D {
 
 		virtual void SetInt(const std::string& name, int value) override;
 		virtual void SetMat4(const std::string& name, const glm::mat4& martix) override;
+		virtual void SeFloat(const std::string& name, float value) override;
 		virtual void SeFloat4(const std::string& name, const glm::vec4& values) override;
 
 		void UploadUniformInt(const std::string& name, const int values);
 
-		void UploadUniformFloat(const std::string& name, const float values);
-		void UploadUniformFloat(const std::string& name, const glm::vec2& values);
+		void UploadUniformFloat(const std::string& name, const float value);
+		void UploadUniformFloat2(const std::string& name, const glm::vec2& values);
 		void UploadUniformFloat3(const std::string& name, const glm::vec3& values);
 		void UploadUniformFloat4(const std::string& name, const glm::vec4& values);
 

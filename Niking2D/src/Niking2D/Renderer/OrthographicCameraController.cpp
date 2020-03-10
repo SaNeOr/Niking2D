@@ -10,6 +10,7 @@ Niking2D::OrthographicCameraController::OrthographicCameraController(float aspec
 
 void Niking2D::OrthographicCameraController::OnUpdate(Timestep ts)
 {
+	N2_PROFILE_FUNCTION();
 
 	//	Forward Move
 	if (Input::IsKeyPressed(N2_KEY_A)) {
@@ -54,6 +55,8 @@ void Niking2D::OrthographicCameraController::OnUpdate(Timestep ts)
 
 void Niking2D::OrthographicCameraController::OnEvent(Event & e)
 {
+	N2_PROFILE_FUNCTION();
+
 	EventDispatcher dispatcher(e);
 	dispatcher.Dispatch<MouseScrolledEvent>(N2_BIND_EVENT_FN(OrthographicCameraController::OnMouseScrolled));
 	dispatcher.Dispatch<WindowResizeEvent>(N2_BIND_EVENT_FN(OrthographicCameraController::OnWindowResized));
@@ -62,6 +65,7 @@ void Niking2D::OrthographicCameraController::OnEvent(Event & e)
 
 bool Niking2D::OrthographicCameraController::OnMouseScrolled(MouseScrolledEvent & e)
 {
+
 	m_ZoomLevel -= e.GetYOffset() * .25f;
 	m_ZoomLevel = std::max(m_ZoomLevel, 0.25f);
 	m_Camera.SetProjection(-m_AspectRation * m_ZoomLevel, m_AspectRation * m_ZoomLevel, -m_ZoomLevel, m_ZoomLevel);

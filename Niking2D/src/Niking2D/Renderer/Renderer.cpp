@@ -11,7 +11,7 @@ namespace Niking2D {
 
 	void Renderer::Init()
 	{
-		//N2_PROFILE_FUNCTION();
+		N2_PROFILE_FUNCTION();
 
 		RenderCommand::Init();
 		Renderer2D::Init();
@@ -19,15 +19,21 @@ namespace Niking2D {
 
 	void Renderer::BeginScene(OrthograhicCamera& camera)
 	{
+		N2_PROFILE_FUNCTION();
+
 		m_SceneData->ViewProjectionMatrix = camera.GetViewProjectionMatrix();
 	}
 
 	void Renderer::EndScene()
 	{
+		N2_PROFILE_FUNCTION();
+
 	}
 
 	void Renderer::Submit(const Ref<Shader>& shader,const Ref<VertexArray>& vertexArrary, const glm::mat4& transform)
 	{
+		N2_PROFILE_FUNCTION();
+
 		shader->Bind();
 		vertexArrary->Bind();
 		

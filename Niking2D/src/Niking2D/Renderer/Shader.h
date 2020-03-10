@@ -17,6 +17,7 @@ namespace Niking2D {
 
 		virtual void SetInt(const std::string& name, int value) = 0;
 		virtual void SetMat4(const std::string& name, const glm::mat4& martix) = 0;
+		virtual void SeFloat(const std::string& name, float values) = 0;
 		virtual void SeFloat4(const std::string& name, const glm::vec4& values) = 0;
  
 		static Ref<Shader> Create(const std::string& filepath);

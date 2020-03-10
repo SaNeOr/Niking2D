@@ -123,7 +123,7 @@ namespace Niking2D {
 }
 
 
-#define N2_PROFILE 1
+#define N2_PROFILE 0
 #if N2_PROFILE
     #define N2_PROFILE_BEGIN_SESSION(name, filepath)  ::Niking2D::Instrumentor::Get().BeginSession(name, filepath)
     #define N2_PROFILE_END_SESSION()        ::Niking2D::Instrumentor::Get().EndSession()
@@ -132,6 +132,6 @@ namespace Niking2D {
 #else
     #define N2_PROFILE_BEGIN_SESSION(name, filepath)
     #define N2_PROFILE_END_SESSION()
-    #define H2_PROFILE_SCOPE(name)  
+    #define N2_PROFILE_SCOPE(name)  
     #define N2_PROFILE_FUNCTION()
 #endif

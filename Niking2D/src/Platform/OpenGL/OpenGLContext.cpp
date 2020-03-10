@@ -9,11 +9,13 @@ namespace Niking2D {
 	Niking2D::OpenGLContext::OpenGLContext(GLFWwindow * windowHandle)
 		:m_WindowHandle(windowHandle)
 	{
+		N2_PROFILE_FUNCTION();
+
 		N2_CORE_ASSERT(windowHandle, "Window handle is null!");
 	}
 	void OpenGLContext::Init()
 	{
-		//N2_PROFILE_FUNCTION();
+		N2_PROFILE_FUNCTION();
 
 
 		glfwMakeContextCurrent(m_WindowHandle);

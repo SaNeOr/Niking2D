@@ -21,6 +21,8 @@ namespace Niking2D {
 
 	OpenGLShader::OpenGLShader(const std::string & filepath)
 	{
+		N2_PROFILE_FUNCTION();
+
 		std::string source = ReadFile(filepath);
 		auto shaderSource = PreProcess(source);
 		Compile(shaderSource);
@@ -47,60 +49,89 @@ namespace Niking2D {
 
 	OpenGLShader::~OpenGLShader()
 	{
+		N2_PROFILE_FUNCTION();
+
 		glDeleteProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Bind() const
 	{
+		N2_PROFILE_FUNCTION();
+
 		glUseProgram(m_RendererID);
 	}
 
 	void OpenGLShader::Unbind() const
 	{
+		N2_PROFILE_FUNCTION();
+
 		glUseProgram(0);
 	}
 
 	void OpenGLShader::SetInt(const std::string& name, int value)
 	{
+		N2_PROFILE_FUNCTION();
+
 		UploadUniformInt(name, value);
 	}
 
 	void OpenGLShader::SetMat4(const std::string& name, const glm::mat4& martix)
 	{
+		N2_PROFILE_FUNCTION();
+
 		UploadUniformMat4(name, martix);
+	}
+
+	void OpenGLShader::SeFloat(const std::string& name, float value)
+	{
+		N2_PROFILE_FUNCTION();
+
+		UploadUniformFloat(name, value);
 	}
 
 	void OpenGLShader::SeFloat4(const std::string& name, const glm::vec4& values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		UploadUniformFloat4(name, values);
 	}
 
 	void OpenGLShader::UploadUniformInt(const std::string & name, const int values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1i(GetUniformLocation(name), values);
 	}
 
 	void OpenGLShader::UploadUniformFloat(const std::string & name, const float values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform1f(GetUniformLocation(name), values);
 	}
 
-	void OpenGLShader::UploadUniformFloat(const std::string & name, const glm::vec2 & values)
+	void OpenGLShader::UploadUniformFloat2(const std::string& name, const glm::vec2& values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform2f(GetUniformLocation(name), values.x, values.y);
 	}
 
 	void OpenGLShader::UploadUniformFloat4(const std::string & name, const glm::vec4& values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform4f(GetUniformLocation(name), values.x, values.y, values.z, values.w);
 	}
 
 	void OpenGLShader::UploadUniformFloat3(const std::string & name, const glm::vec3 & values)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniform3f(GetUniformLocation(name), values.x, values.y, values.z);
 	}
@@ -108,12 +139,16 @@ namespace Niking2D {
 
 	void OpenGLShader::UploadUniformMat3(const std::string & name, const glm::mat3 & matrix)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	}
 
 	void OpenGLShader::UploadUniformMat4(const std::string& name, const glm::mat4& matrix)
 	{
+		N2_PROFILE_FUNCTION();
+
 		//int location = glGetUniformLocation(m_RendererID, name.c_str());
 		glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(matrix));
 	}
@@ -121,6 +156,8 @@ namespace Niking2D {
 
 	int OpenGLShader::GetUniformLocation(const std::string & name)
 	{
+		N2_PROFILE_FUNCTION();
+
 		if (m_UniformLocationCache.find(name) != m_UniformLocationCache.end())
 			return m_UniformLocationCache[name];
 
@@ -135,6 +172,7 @@ namespace Niking2D {
 
 	std::string OpenGLShader::ReadFile(const std::string & filepath)
 	{
+		N2_PROFILE_FUNCTION();
 
 		std::string result;
 		std::ifstream in(filepath, std::ios::in | std::ios::binary);
@@ -157,6 +195,8 @@ namespace Niking2D {
 
 	std::unordered_map<GLenum, std::string> OpenGLShader::PreProcess(const std::string & source)
 	{
+		N2_PROFILE_FUNCTION();
+
 		std::unordered_map<GLenum, std::string> shaderSource;
 		const char* typeToken = "#type";
 		size_t typeTokenLength = strlen(typeToken);
@@ -192,6 +232,8 @@ namespace Niking2D {
 
 	void OpenGLShader::Compile(const std::unordered_map<GLenum, std::string> shaderSources)
 	{
+		N2_PROFILE_FUNCTION();
+
 		// Read our shaders into the appropriate buffers
 		//std::string vertexSource = shaderSources[GL_VERTEX_SHADER];// Get source code for vertex shader.
 		//std::string fragmentSource = shaderSources[GL_FRAGMENT_SHADER];// Get source code for fragment shader.

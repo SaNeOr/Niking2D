@@ -26,27 +26,37 @@ namespace Niking2D {
 
 	OpenGLVertexArray::OpenGLVertexArray()
 	{
+		N2_PROFILE_FUNCTION();
+
 		glGenVertexArrays(1, &m_RendererID);
 		glBindVertexArray(m_RendererID);
 	}
 
 	OpenGLVertexArray::~OpenGLVertexArray()
 	{
+		N2_PROFILE_FUNCTION();
+
 		glDeleteVertexArrays(1, &m_RendererID);
 	}
 
 	void Niking2D::OpenGLVertexArray::Bind() const
 	{
+		N2_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererID);
 	}
 
 	void Niking2D::OpenGLVertexArray::Unbind() const
 	{
+		N2_PROFILE_FUNCTION();
+
 		glBindVertexArray(0);
 	}
 
 	void Niking2D::OpenGLVertexArray::AddVertexBuffer(const Ref<VertexBuffer>& vertexBuffer)
 	{
+		N2_PROFILE_FUNCTION();
+
 		N2_CORE_ASSERT(vertexBuffer->GetLayout().GetElements().size(), "Vertex Buffer has no layout!");
 
 		glBindVertexArray(m_RendererID);
@@ -70,6 +80,8 @@ namespace Niking2D {
 
 	void Niking2D::OpenGLVertexArray::SetIndexBuffer(const Ref<IndexBuffer>& indexBuffer)
 	{
+		N2_PROFILE_FUNCTION();
+
 		glBindVertexArray(m_RendererID);
 		indexBuffer->Bind();
 
