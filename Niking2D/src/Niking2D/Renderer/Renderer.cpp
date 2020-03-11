@@ -17,7 +17,7 @@ namespace Niking2D {
 		Renderer2D::Init();
 	}
 
-	void Renderer::BeginScene(OrthograhicCamera& camera)
+	void Renderer::BeginScene(OrthographicCamera& camera)
 	{
 		N2_PROFILE_FUNCTION();
 

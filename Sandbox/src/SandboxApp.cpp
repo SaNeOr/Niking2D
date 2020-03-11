@@ -4,7 +4,7 @@
 #include "ExampleLayer.h"
 #include "Sandbox2D.h"
 
-
+#include "ExampleGame/GameLayer.h"
 
 
 class Sandbox : public Niking2D::Application {
@@ -13,8 +13,9 @@ public:
 	{
 		//PushOverLayer(new Niking2D::ImGuiLayer());
 		//PushLayer(new ExampleLayer());
-		PushLayer(new Sandbox2D());
-		
+		//PushLayer(new Sandbox2D());
+		PushLayer(new GameLayer());
+
 	}
 	
 	~Sandbox() {

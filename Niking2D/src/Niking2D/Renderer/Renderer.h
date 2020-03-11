@@ -12,7 +12,7 @@ namespace Niking2D {
 
 		static void Init();
 
-		static void BeginScene(OrthograhicCamera& camera);
+		static void BeginScene(OrthographicCamera& camera);
 		static void EndScene();
 
 		static void Submit(const Ref<Shader>& shader,

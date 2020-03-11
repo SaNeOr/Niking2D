@@ -61,7 +61,7 @@ namespace Niking2D {
 		delete s_Data;
 	}
 
-	void Renderer2D::BeginScene(const OrthograhicCamera& camera)
+	void Renderer2D::BeginScene(const OrthographicCamera& camera)
 	{
 		N2_PROFILE_FUNCTION();
 
@@ -79,7 +79,6 @@ namespace Niking2D {
 
 	void Renderer2D::DrawQuad(const glm::vec2& position, const glm::vec2& size, const glm::vec4& color)
 	{
-
 		DrawQuad({ position.x, position.y, 0.0f }, size, color);
 	}
 

@@ -12,7 +12,7 @@ namespace Niking2D {
 		
 		void OnUpdate(Timestep ts);
 
-		OrthograhicCamera& GetCamera() { return m_Camera; }
+		OrthographicCamera& GetCamera() { return m_Camera; }
 
 		float GetZoomLevel() const { return m_ZoomLevel; }
 		void SetZoomLevel(float level) { m_ZoomLevel = level; }
@@ -26,7 +26,7 @@ namespace Niking2D {
 	private:
 		float m_AspectRation;
 		float m_ZoomLevel = 1.0f;
-		OrthograhicCamera m_Camera;
+		OrthographicCamera m_Camera;
 
 		bool m_Rotation;
 
