@@ -86,10 +86,14 @@ void Level::Init()
 
 void Level::OnUpdate(Niking2D::Timestep ts)
 {
-
-	CollisionTest();
-
 	m_Player.OnUpdate(ts);
+
+	if (CollisionTest())
+	{
+		//GameOver();
+		return;
+	}
+
 
 	m_PillarHSV.x += 0.1f * ts;
 	if (m_PillarHSV.x > 1.0f)
@@ -150,6 +154,18 @@ void Level::OnRender()
 void Level::OnImGuiRender()
 {
 	m_Player.OnImGuiRender();
+}
+
+void Level::Reset()
+{
+	m_GameOver = false;
+
+	m_Player.Reset();
+
+	m_PillarTarget = 30.0f;
+	m_PillarIndex = 0;
+	for (int i = 0; i < 5; i++)
+		CreatePillar(i, i * 10.0f);
 }
 
 void Level::CreatePillar(int index, float offset)
@@ -247,4 +263,9 @@ bool Level::CollisionTest()
 
 	}
 	return false;
+}
+
+void Level::GameOver()
+{
+	m_GameOver = true;
 }

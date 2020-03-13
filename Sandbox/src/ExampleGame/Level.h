@@ -21,13 +21,20 @@ public:
 
 	Player& GetPlayer() { return m_Player; }
 	void OnImGuiRender();
+
+	bool IsGameOver() const { return m_GameOver; }
+	void Reset();
 	
 private:
 	void CreatePillar(int index, float offset);
 	bool CollisionTest();
 
+	void GameOver();
 private:
 	Player m_Player;
+
+	bool m_GameOver = false;
+
 
 	float m_PillarTarget = 30.0f;
 	int m_PillarIndex = 0;

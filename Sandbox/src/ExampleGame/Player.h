@@ -13,10 +13,14 @@ public:
 	void OnUpdate(Niking2D::Timestep ts);
 	void OnRender();
 
+	void OnImGuiRender();
+
+	void Reset();
+
 	const glm::vec2 GetPosition()const { return m_Position; }
 	float GetRotation() { return m_Velocity.y * 4.0f - 90.0f; }
 
-	void OnImGuiRender();
+	uint32_t GetScore() const { return (uint32_t)(m_Position.x + 10.0f) / 10.0f; }
 
 	//void Reset();
 private:
