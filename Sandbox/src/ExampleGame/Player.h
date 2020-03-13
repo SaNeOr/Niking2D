@@ -1,6 +1,7 @@
 #pragma once
 
 #include<Niking2D.h>
+#include "ParticleSystem.h"
 
 #include "Random.h"
 class Player {
@@ -24,6 +25,13 @@ private:
 
 	float m_EnginePower = 0.5f;
 	float m_Gravity = 0.4f;
+
+	float m_Time = 0.0f;
+	float m_SmokeEmitInterval = 0.4f;
+	float m_SmokeNextEmitTime = m_SmokeEmitInterval;
+
+	ParticleProps m_SmokeParticle, m_EngineParticle;
+	ParticleSystem m_ParticleSystem;
 
 	Niking2D::Ref<Niking2D::Texture2D> m_ShipTexture;
 };

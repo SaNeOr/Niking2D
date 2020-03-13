@@ -26,6 +26,7 @@ private:
 
 	Level m_Level;
 	float m_Time = 0.0f;
+	bool m_Blink = false;
 	
 	enum class GameState {
 		Play = 0, MainMenu = 1, GameOver = 2

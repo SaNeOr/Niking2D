@@ -23,6 +23,9 @@ void GameLayer::OnDetach()
 
 void GameLayer::OnUpdate(Niking2D::Timestep ts)
 {
+	m_Time += ts;
+	if ((int)(m_Time * 10.0f) % 8 > 4)
+		m_Blink = !m_Blink;
 
 	m_Level.OnUpdate(ts);
 
@@ -45,9 +48,6 @@ void GameLayer::OnImGuiRender()
 	float test = 0.0f;
 	ImGui::Begin("Settings");
 	m_Level.OnImGuiRender();
-	//ImGui::DragFloat("Engine Power", &m_EnginePower, 0.1f); 
-	//ImGui::DragFloat("Engine Power", &test, 0.1f);
-
 	ImGui::End();
 }
 
@@ -65,6 +65,5 @@ void GameLayer::CreateCamera(uint32_t width, uint32_t height)
 	float left = bottom * aspectRatio;
 	float right = top * aspectRatio;
 	m_Camera = CreateScope<OrthographicCamera>(left, right, bottom, top);
-	
 	
 }

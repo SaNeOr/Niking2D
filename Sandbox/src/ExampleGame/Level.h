@@ -33,7 +33,13 @@ private:
 	int m_PillarIndex = 0;
 
 	std::vector<Pillar> m_Pillars;
-
+	glm::vec3 m_PillarHSV = { 0.0f, 0.8f, 0.8f };
+	
+	struct Point
+	{
+		float x, y;
+	};
+	std::vector<Point> m_Points;
 
 	Niking2D::Ref<Niking2D::Texture2D> m_TriangleTexture;
 
