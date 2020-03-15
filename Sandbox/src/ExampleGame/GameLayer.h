@@ -5,6 +5,9 @@
 #include "Level.h"
 #include <imgui.h>
 
+#define SOL_ALL_SAFETIES_ON 1
+#include "sol.hpp"
+
 
 class GameLayer : public Niking2D::Layer {
 public:
@@ -25,6 +28,8 @@ public:
 private:
 	void CreateCamera(uint32_t width, uint32_t height);
 
+	void LevelUpdate(Niking2D::Timestep ts);
+
 private:
 	Niking2D::Scope<Niking2D::OrthographicCamera> m_Camera;
 
@@ -40,5 +45,6 @@ private:
 
 	GameState m_State = GameState::MainMenu;
 
+	sol::state* m_LuaState;
 
 };

@@ -2,6 +2,7 @@
 #include <imgui.h>
 
 
+
 using namespace Niking2D;
 
 GameLayer::GameLayer()
@@ -10,10 +11,21 @@ GameLayer::GameLayer()
 	auto& window = Application::Get().GetWindow();
 	CreateCamera(window.GetWidth(), window.GetHeight());
 
+	m_LuaState = new sol::state();
+
+	m_LuaState->open_libraries(sol::lib::base);
+
+	
+	//(*m_LuaState)["LevelUpdate"] = &GameLayer::LevelUpdate;
+	m_LuaState->set_function("LevelUpdate", &GameLayer::LevelUpdate, this);
+	m_LuaState->script_file("src/examplegame/test.lua");
+
 }
 
 void GameLayer::OnAttach()
 {
+	
+
 	m_Level.Init();
 
 	ImGuiIO io = ImGui::GetIO();
@@ -37,7 +49,8 @@ void GameLayer::OnUpdate(Niking2D::Timestep ts)
 	{
 		case GameState::Play:
 		{
-			m_Level.OnUpdate(ts);
+			//m_Level.OnUpdate(ts);
+			(*m_LuaState)["OnUpdate"](ts);
 			break;
 		}
 	}
@@ -142,4 +155,10 @@ void GameLayer::CreateCamera(uint32_t width, uint32_t height)
 	float right = top * aspectRatio;
 	m_Camera = CreateScope<OrthographicCamera>(left, right, bottom, top);
 	
+}
+
+void GameLayer::LevelUpdate(Timestep ts)
+{
+	m_Level.OnUpdate(ts);
+
 }
