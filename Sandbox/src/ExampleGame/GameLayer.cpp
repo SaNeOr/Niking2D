@@ -4,6 +4,8 @@
 
 
 using namespace Niking2D;
+#define DEBUG
+
 
 GameLayer::GameLayer()
 	:Layer("GameLayer")
@@ -11,14 +13,15 @@ GameLayer::GameLayer()
 	auto& window = Application::Get().GetWindow();
 	CreateCamera(window.GetWidth(), window.GetHeight());
 
-	m_LuaState = new sol::state();
+	//m_LuaState = new sol::state();
 
-	m_LuaState->open_libraries(sol::lib::base);
+	//m_LuaState->open_libraries(sol::lib::base);
+	Random::Init();
 
 	
 	//(*m_LuaState)["LevelUpdate"] = &GameLayer::LevelUpdate;
-	m_LuaState->set_function("LevelUpdate", &GameLayer::LevelUpdate, this);
-	m_LuaState->script_file("src/examplegame/test.lua");
+	//m_LuaState->set_function("GameLayer.LevelUpdate", &GameLayer::LevelUpdate, this);
+	//m_LuaState->script_file("src/examplegame/test.lua");
 
 }
 
@@ -30,6 +33,7 @@ void GameLayer::OnAttach()
 
 	ImGuiIO io = ImGui::GetIO();
 	m_Font = io.Fonts->AddFontFromFileTTF("assets/fonts/OpenSans-Regular.ttf", 120.0f);
+
 }
 
 void GameLayer::OnDetach()
@@ -49,8 +53,8 @@ void GameLayer::OnUpdate(Niking2D::Timestep ts)
 	{
 		case GameState::Play:
 		{
-			//m_Level.OnUpdate(ts);
-			(*m_LuaState)["OnUpdate"](ts);
+			m_Level.OnUpdate(ts);
+			//(*m_LuaState)["GameLayer.LevelUpdate"](float(ts));
 			break;
 		}
 	}

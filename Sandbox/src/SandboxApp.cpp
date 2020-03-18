@@ -6,6 +6,8 @@
 
 #include "ExampleGame/GameLayer.h"
 
+#include "ExampleScript/ScriptGameLayer.h"
+
 
 class Sandbox : public Niking2D::Application {
 public:
@@ -14,7 +16,9 @@ public:
 		//PushOverLayer(new Niking2D::ImGuiLayer());
 		//PushLayer(new ExampleLayer());
 		//PushLayer(new Sandbox2D());
-		PushLayer(new GameLayer());
+
+		//PushLayer(new GameLayer());
+		PushLayer(new ScriptGameLayer());
 
 	}
 	

@@ -181,8 +181,6 @@ void Level::CreatePillar(int index, float offset)
 
 	pillar.TopPosition.y = 10.0f - ((10.0f - center) * 0.2f) + gap * 0.5f;
 	pillar.BottomPosition.y = -10.0f - ((-10.0f - center) * 0.2f) - gap * 0.5f;
-
-
 }
 
 

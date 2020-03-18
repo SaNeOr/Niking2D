@@ -35,6 +35,10 @@
 #include "Niking2D/Core/Timestep.h"
 // ----------------------------------
 
+// ----Script  Head Files--------------
+#include "Niking2D/Script/Script.h"
+// ----------------------------------
+
 
 
 

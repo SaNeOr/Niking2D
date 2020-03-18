@@ -24282,7 +24282,7 @@ namespace sol {
 				std::cerr << err;
 				std::cerr << std::endl;
 #endif
-				throw error(err);
+     				throw error(err);
 			}
 			lua_settop(L, 0);
 			throw error(std::string("An unexpected error occurred and panic has been invoked"));

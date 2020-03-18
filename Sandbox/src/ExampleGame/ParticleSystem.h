@@ -9,6 +9,7 @@ struct ParticleProps
 	glm::vec4 ColorBegin, ColorEnd;
 	float SizeBegin, SizeEnd, SizeVariation;
 	float LifeTime = 1.0f;
+
 };
 
 class ParticleSystem

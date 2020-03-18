@@ -1,5 +1,5 @@
 
 function OnUpdate( dt )
-	LevelUpdate(dt)
+	GameLayer.LevelUpdate(dt)
 end
 

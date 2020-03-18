@@ -96,7 +96,7 @@ namespace Niking2D {
 	void ImGuiLayer::OnImGuiRender()
 	{
 		static bool show = true;
-		ImGui::ShowDemoWindow(&show);
+		//ImGui::ShowDemoWindow(&show);
 
 		//ImGui::Begin("");
 		//ImGui::End();

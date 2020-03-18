@@ -5,6 +5,7 @@ extern Niking2D::Application * Niking2D::CreateApplication();
 
 int main(int argc, char ** argv) {
 	Niking2D::Log::Init();
+	Niking2D::Script::Init();
 	//N2_CORE_TRACE("Initalized Log!");
 	//N2_CLIENT_INFO("Hello var = {0} {2}", 1, 5, 10.5);
 	//N2_CLIENT_WARN("Hello");
